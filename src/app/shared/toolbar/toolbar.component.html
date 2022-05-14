@@ -1,0 +1,19 @@
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+    <div (click)="toggleSideBar()" style="cursor: pointer;font-size: x-large">
+      <span class="text-900">Software </span>
+      <span class="text-blue-600">Craft</span>
+    </div>
+
+  </div>
+  <div class="p-toolbar-group-right">
+    <p-button *ngIf="!user" icon="pi pi-user" class="mr-2" label="Login" (click)="login()"></p-button>
+
+    <p-avatar *ngIf="user" label="A" styleClass="mr-2" size="large"
+              [style]="{'background-color': '#9c27b0', 'color': '#ffffff','cursor':'pointer'}"
+              (click)="userAvatarMenu.toggle($event)"
+              shape="circle"></p-avatar>
+
+    <p-menu #userAvatarMenu [popup]="true" [model]="items"></p-menu>
+  </div>
+</p-toolbar>
