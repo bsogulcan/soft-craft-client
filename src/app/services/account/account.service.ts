@@ -5,16 +5,15 @@ import {environment} from "../../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class AccountService {
 
   endPoint: string;
 
   constructor(private httpClient: HttpClient) {
-    this.endPoint = '/api/identity/users';
+    this.endPoint = '/api/account/my-profile';
   }
 
-  getUserById(id: string) {
-    return this.httpClient.get(environment.apiBaseUrl + this.endPoint + '/' + id);
+  myProfile() {
+    return this.httpClient.get(environment.apiBaseUrl + this.endPoint);
   }
-
 }

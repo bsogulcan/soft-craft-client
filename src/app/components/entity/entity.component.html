@@ -1,0 +1,62 @@
+<div class="surface-card p-4 shadow-2 border-round" [@routerTransition]>
+  <div class="flex card-container blue-container overflow-hidden">
+    <div
+      class="flex-none">
+      <div class="font-medium text-3xl text-900 mb-3">
+        Entities
+      </div>
+    </div>
+    <div
+      class="flex-grow-1">
+
+    </div>
+    <div
+      class="flex-none flex ">
+      <p-button label="New Entity" icon="pi pi-plus" (click)="newEntity()" styleClass="p-button-sm m-2"></p-button>
+
+    </div>
+  </div>
+  <div class="text-500 mb-5">Entities Management</div>
+  <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" position="bottom" [baseZIndex]="10000"
+                   rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+
+  <div class="grid">
+    <div class="col-12">
+      <div class="grid">
+        <div class="col-12">
+          <p-table [value]="entities" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Primary Type</th>
+                <th>Name</th>
+                <th>Display Name</th>
+                <th>Audited</th>
+                <th>Tenant Type</th>
+                <th>Actions</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-entity>
+              <tr>
+                <td>{{getPrimaryKeyTypeName(entity.primaryKeyType)}}</td>
+                <td>{{entity.name}}</td>
+                <td>{{entity.displayName}}</td>
+                <td>
+                  <p-checkbox [(ngModel)]="entity.isFullAudited" [binary]="true" [disabled]="true"></p-checkbox>
+                </td>
+                <td>{{getTenantTypeName(entity.tenantType)}}</td>
+                <td>
+                  <button pButton pRipple type="button" icon="pi pi-info-circle" [matMenuTriggerFor]="entityActionsMenu"
+                          class="p-button-rounded p-button-text"></button>
+                  <mat-menu #entityActionsMenu>
+                    <menu mat-menu-item (click)="entityDetails(entity.id)">Details</menu>
+                    <menu mat-menu-item (click)="entityProperties(entity.id)">Properties</menu>
+                  </mat-menu>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

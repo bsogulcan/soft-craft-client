@@ -25,7 +25,25 @@ import {TableModule} from "primeng/table";
 import {CreateProjectComponent} from './components/project/create-project/create-project.component';
 import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 import {DialogModule} from 'primeng/dialog';
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {InputTextModule} from "primeng/inputtext";
+import {InputNumberModule} from "primeng/inputnumber";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {FormsModule} from "@angular/forms";
+import {ToastModule} from "primeng/toast";
+import {PanelModule} from "primeng/panel";
+import {RippleModule} from "primeng/ripple";
+import {ToggleButtonModule} from "primeng/togglebutton";
+import {DropdownModule} from "primeng/dropdown";
+import {EntityComponent} from './components/entity/entity.component';
+import {ProjectDetailsComponent} from './components/project/project-details/project-details.component';
+import {InplaceModule} from "primeng/inplace";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ListboxModule} from "primeng/listbox";
+import {CreateEntityComponent} from './components/entity/create-entity/create-entity.component';
+import {CheckboxModule} from "primeng/checkbox";
+import {MatMenuModule} from '@angular/material/menu';
+import { EntityDetailsComponent } from './components/entity/entity-details/entity-details.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +53,11 @@ import {MessageService} from "primeng/api";
     ToolbarComponent,
     SidebarComponent,
     ProjectComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    EntityComponent,
+    ProjectDetailsComponent,
+    CreateEntityComponent,
+    EntityDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,9 +76,27 @@ import {MessageService} from "primeng/api";
     CardModule,
     TableModule,
     DynamicDialogModule,
-    DialogModule
+    DialogModule,
+    InputTextModule,
+    InputNumberModule,
+    InputTextareaModule,
+    FormsModule,
+    ToastModule,
+    PanelModule,
+    RippleModule,
+    ToggleButtonModule,
+    DropdownModule,
+    InplaceModule,
+    ConfirmDialogModule,
+    ListboxModule,
+    CheckboxModule,
+    MatMenuModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}, DialogService, MessageService],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
+    multi: true
+  }, DialogService, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
