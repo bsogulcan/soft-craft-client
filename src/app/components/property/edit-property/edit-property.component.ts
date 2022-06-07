@@ -1,24 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
-import {PropertyService} from "../../../services/property/property.service";
-import {appModuleAnimation} from "../../../shared/animations/routerTransition";
-import {CreatePropertyInput} from "../../../services/property/dtos/CreatePropertyInput";
-import {PrimaryKeyType} from "../../../services/enums/PrimaryKeyType";
-import {PropertyType} from "../../../services/enums/PropertyType";
-import {EntityFullOutput} from "../../../services/entity/dtos/EntityFullOutput";
 import {EntityService} from "../../../services/entity/entity.service";
+import {PropertyService} from "../../../services/property/property.service";
+import {PropertyFullOutput} from "../../../services/property/dtos/PropertyFullOutput";
+import {appModuleAnimation} from "../../../shared/animations/routerTransition";
+import {EntityFullOutput} from "../../../services/entity/dtos/EntityFullOutput";
+import {PropertyType} from "../../../services/enums/PropertyType";
 import {GetEntityListInput} from "../../../services/entity/dtos/GetEntityListInput";
 
 @Component({
-  selector: 'app-create-property',
-  templateUrl: './create-property.component.html',
-  styleUrls: ['./create-property.component.css'],
+  selector: 'app-edit-property',
+  templateUrl: './edit-property.component.html',
+  styleUrls: ['./edit-property.component.css'],
   animations: [appModuleAnimation()],
 })
-export class CreatePropertyComponent implements OnInit {
-  property: CreatePropertyInput = new CreatePropertyInput();
+export class EditPropertyComponent implements OnInit {
+  property: PropertyFullOutput;
   propertyTypes: string[];
-  selectedPropertyType: string = 'String';
+  selectedPropertyType: string;
   entities: Array<EntityFullOutput>;
   saving: boolean;
 
@@ -26,7 +25,6 @@ export class CreatePropertyComponent implements OnInit {
               private config: DynamicDialogConfig,
               private entityService: EntityService,
               private propertyService: PropertyService) {
-    this.property.entityId = config.data.entityId;
 
     this.propertyTypes = Object.keys(PropertyType).filter((item) => {
       return isNaN(Number(item));
@@ -37,19 +35,25 @@ export class CreatePropertyComponent implements OnInit {
     entityService.getAll(getEntityListInput).subscribe(response => {
       this.entities = response.items;
     });
+
+    propertyService.get(config.data.propertyId).subscribe(response => {
+      if (response) {
+        this.property = response;
+        this.selectedPropertyType = PropertyType[this.property.type];
+        console.log(this.property)
+      }
+    })
+
   }
 
   ngOnInit(): void {
-
   }
 
   save() {
-    // @ts-ignore
-    this.property.type = PropertyType[this.selectedPropertyType];
-    this.propertyService.create(this.property).subscribe(response => {
-      if (response) {
-        this.ref.close(response);
-      }
-    })
+
+  }
+
+  close() {
+    this.ref.close();
   }
 }

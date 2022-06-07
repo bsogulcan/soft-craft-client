@@ -8,6 +8,11 @@ import {PropertyFullOutput} from "../../services/property/dtos/PropertyFullOutpu
 import {appModuleAnimation} from "../../shared/animations/routerTransition";
 import {DialogService} from "primeng/dynamicdialog";
 import {CreatePropertyComponent} from "./create-property/create-property.component";
+import {PropertyType} from "../../services/enums/PropertyType";
+import {TenantType} from "../../services/enums/TenantType";
+import {ConfirmationService} from "primeng/api";
+import {UpdateEntityInput} from "../../services/entity/dtos/UpdateEntityInput";
+import {EditPropertyComponent} from "./edit-property/edit-property.component";
 
 @Component({
   selector: 'app-property',
@@ -25,7 +30,8 @@ export class PropertyComponent implements OnInit {
               private router: Router,
               private entityService: EntityService,
               private propertyService: PropertyService,
-              public dialogService: DialogService) {
+              public dialogService: DialogService,
+              private confirmationService: ConfirmationService) {
     route.params.subscribe(param => {
       if (param["projectId"]) {
         this.projectId = param["projectId"];
@@ -35,15 +41,9 @@ export class PropertyComponent implements OnInit {
         entityService.get(entityId).subscribe(response => {
           if (response) {
             this.entity = response;
+            this.getPropertyList();
           }
         });
-        const getPropertyListInput = new GetPropertyListInput();
-        getPropertyListInput.entityId = entityId;
-        propertyService.getAll(getPropertyListInput).subscribe(response => {
-          if (response) {
-            this.properties = response.items;
-          }
-        })
       }
     })
   }
@@ -51,17 +51,66 @@ export class PropertyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getPropertyTypeName(type: string) {
-    return '';
+  getPropertyList() {
+    const getPropertyListInput = new GetPropertyListInput();
+    getPropertyListInput.entityId = this.entity.id;
+    this.propertyService.getAll(getPropertyListInput).subscribe(response => {
+      if (response) {
+        this.properties = response.items;
+      }
+    })
+  }
+
+  getPropertyTypeName(type: PropertyType) {
+    return PropertyType[type];
   }
 
   openNewPropertyDialog() {
     const ref = this.dialogService.open(CreatePropertyComponent, {
       data: {
+        projectId: this.projectId,
         entityId: this.entity.id
       },
       header: 'New Property',
       width: '40%'
+    });
+
+    ref.onClose.subscribe(response => {
+      if (response) {
+        this.getPropertyList();
+      }
+    })
+  }
+
+  deleteProperty(propertyId: number) {
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this record?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.propertyService.delete(propertyId).subscribe(response => {
+          this.getPropertyList();
+        })
+      },
+      key: "positionDialog"
+    });
+  }
+
+  updateProperty(entityId: number) {
+    const ref = this.dialogService.open(EditPropertyComponent, {
+      data: {
+        propertyId: entityId,
+        projectId: this.projectId,
+        entityId: this.entity.id
+      },
+      header: 'Edit Property',
+      width: '40%'
+    });
+
+    ref.onClose.subscribe(response => {
+      if (response) {
+        this.getPropertyList();
+      }
     });
   }
 }

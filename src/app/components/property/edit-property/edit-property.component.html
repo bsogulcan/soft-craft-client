@@ -1,4 +1,4 @@
-<div class="p-fluid mt-2 ml-1" [@routerTransition]>
+<div class="p-fluid mt-2 ml-1" [@routerTransition] *ngIf="property">
   <ul class="list-none p-0 m-0">
     <li class="flex align-items-center py-3 px-2  surface-border flex-wrap">
       <div class="text-500 w-6 md:w-2 font-medium">Type</div>
@@ -77,8 +77,12 @@
     <div class="flex flex-row-reverse flex-wrap card-container ">
       <div
         class="flex align-items-center justify-content-center ">
-        <button pButton pRipple type="button" icon="pi pi-plus" label="Create" [loading]="saving" (click)="save()"
+        <button pButton pRipple type="button" icon="pi pi-times" label="Close" (click)="close()"
+                class="p-button-outlined p-button-rounded p-button-danger mr-2"></button>
+
+        <button pButton pRipple type="button" icon="pi pi-plus" label="Modify" [loading]="saving" (click)="save()"
                 class="p-button-rounded w-100"></button>
+
       </div>
     </div>
   </div>

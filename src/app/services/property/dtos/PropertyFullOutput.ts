@@ -12,4 +12,9 @@ export class PropertyFullOutput {
   isRelationalProperty: boolean;
   relationalEntityId: number;
   relationalEntity: EntityFullOutput | undefined;
+  toolTip: string;
+  required: boolean;
+  indexed: boolean;
+  maxLength: number;
+  unique: boolean;
 }

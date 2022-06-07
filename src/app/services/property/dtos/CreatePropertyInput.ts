@@ -9,4 +9,9 @@ export class CreatePropertyInput {
   entityId: number;
   isRelationalProperty: boolean;
   relationalEntityId: number;
+  toolTip: string;
+  required: boolean;
+  indexed: boolean;
+  maxLength: number;
+  unique: boolean;
 }

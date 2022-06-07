@@ -46,6 +46,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { EntityDetailsComponent } from './components/entity/entity-details/entity-details.component';
 import { PropertyComponent } from './components/property/property.component';
 import { CreatePropertyComponent } from './components/property/create-property/create-property.component';
+import {ScrollPanelModule} from "primeng/scrollpanel";
+import { EditPropertyComponent } from './components/property/edit-property/edit-property.component';
 
 @NgModule({
   declarations: [
@@ -61,41 +63,43 @@ import { CreatePropertyComponent } from './components/property/create-property/c
     CreateEntityComponent,
     EntityDetailsComponent,
     PropertyComponent,
-    CreatePropertyComponent
+    CreatePropertyComponent,
+    EditPropertyComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    ToolbarModule,
-    ButtonModule,
-    SplitButtonModule,
-    HttpClientModule,
-    OAuthModule.forRoot(),
-    AvatarModule,
-    MenuModule,
-    SidebarModule,
-    ChipModule,
-    PanelMenuModule,
-    CardModule,
-    TableModule,
-    DynamicDialogModule,
-    DialogModule,
-    InputTextModule,
-    InputNumberModule,
-    InputTextareaModule,
-    FormsModule,
-    ToastModule,
-    PanelModule,
-    RippleModule,
-    ToggleButtonModule,
-    DropdownModule,
-    InplaceModule,
-    ConfirmDialogModule,
-    ListboxModule,
-    CheckboxModule,
-    MatMenuModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        ToolbarModule,
+        ButtonModule,
+        SplitButtonModule,
+        HttpClientModule,
+        OAuthModule.forRoot(),
+        AvatarModule,
+        MenuModule,
+        SidebarModule,
+        ChipModule,
+        PanelMenuModule,
+        CardModule,
+        TableModule,
+        DynamicDialogModule,
+        DialogModule,
+        InputTextModule,
+        InputNumberModule,
+        InputTextareaModule,
+        FormsModule,
+        ToastModule,
+        PanelModule,
+        RippleModule,
+        ToggleButtonModule,
+        DropdownModule,
+        InplaceModule,
+        ConfirmDialogModule,
+        ListboxModule,
+        CheckboxModule,
+        MatMenuModule,
+        ScrollPanelModule
+    ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,

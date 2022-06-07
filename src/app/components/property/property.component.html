@@ -11,7 +11,8 @@
     </div>
     <div
       class="flex-none flex ">
-      <p-button label="New Property" (click)="openNewPropertyDialog()" icon="pi pi-plus" styleClass="p-button m-2"></p-button>
+      <p-button label="New Property" (click)="openNewPropertyDialog()" icon="pi pi-plus"
+                styleClass="p-button m-2"></p-button>
     </div>
   </div>
   <div class="text-500 mb-5">You can modify properties of current entity</div>
@@ -27,32 +28,48 @@
                 <th>Name</th>
                 <th>Display Name</th>
                 <th>Nullable</th>
-                <th>Relational Property</th>
                 <th>Relational Entity Name</th>
+                <th>ToolTip</th>
+                <th>Max Length</th>
+                <th>Required</th>
+                <th>Unique</th>
+                <th>Indexed</th>
                 <th>Actions</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-property>
               <tr>
                 <td>{{getPropertyTypeName(property.type)}}</td>
-                <td>{{entity.name}}</td>
-                <td>{{entity.displayName}}</td>
+                <td>{{property.name}}</td>
+                <td>{{property.displayName}}</td>
                 <td>
                   <p-checkbox [(ngModel)]="property.isNullable" [binary]="true" [disabled]="true"></p-checkbox>
                 </td>
+                <td>{{property.relationalEntity?.name}}</td>
+
+                <td>{{property.toolTip}}</td>
+                <td>{{property.maxLength}}</td>
                 <td>
-                  <p-checkbox [(ngModel)]="property.isRelationalProperty" [binary]="true"
+                  <p-checkbox [(ngModel)]="property.required" [binary]="true"
                               [disabled]="true"></p-checkbox>
                 </td>
-                <td>{{property.relationalEntity?.name}}</td>
+                <td>
+                  <p-checkbox [(ngModel)]="property.unique" [binary]="true"
+                              [disabled]="true"></p-checkbox>
+                </td>
+                <td>
+                  <p-checkbox [(ngModel)]="property.indexed" [binary]="true"
+                              [disabled]="true"></p-checkbox>
+                </td>
                 <td>
                   <button pButton pRipple type="button" icon="pi pi-info-circle" [matMenuTriggerFor]="entityActionsMenu"
                           class="p-button-rounded p-button-text"></button>
                   <mat-menu #entityActionsMenu>
-                    <menu mat-menu-item>Details</menu>
-                    <menu mat-menu-item>Properties</menu>
+                    <menu mat-menu-item (click)="updateProperty(property.id)">Update</menu>
+                    <menu mat-menu-item (click)="deleteProperty(property.id)">Delete</menu>
                   </mat-menu>
                 </td>
+
               </tr>
             </ng-template>
           </p-table>
@@ -60,5 +77,6 @@
       </div>
     </div>
   </div>
-
+  <p-confirmDialog [style]="{width: '50vw'}" key="positionDialog" position="bottom" [baseZIndex]="10000"
+                   rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
 </div>
