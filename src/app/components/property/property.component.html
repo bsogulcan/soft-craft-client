@@ -1,0 +1,64 @@
+<div class="surface-card p-4 shadow-2 border-round" [@routerTransition] *ngIf="entity">
+  <div class="flex card-container blue-container overflow-hidden">
+    <div
+      class="flex-none">
+      <div class="font-medium text-3xl text-900 mb-3">
+        {{entity.name}} Entity
+      </div>
+    </div>
+    <div
+      class="flex-grow-1">
+    </div>
+    <div
+      class="flex-none flex ">
+      <p-button label="New Property" (click)="openNewPropertyDialog()" icon="pi pi-plus" styleClass="p-button m-2"></p-button>
+    </div>
+  </div>
+  <div class="text-500 mb-5">You can modify properties of current entity</div>
+
+  <div class="grid">
+    <div class="col-12">
+      <div class="grid">
+        <div class="col-12">
+          <p-table [value]="properties" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Property Type</th>
+                <th>Name</th>
+                <th>Display Name</th>
+                <th>Nullable</th>
+                <th>Relational Property</th>
+                <th>Relational Entity Name</th>
+                <th>Actions</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-property>
+              <tr>
+                <td>{{getPropertyTypeName(property.type)}}</td>
+                <td>{{entity.name}}</td>
+                <td>{{entity.displayName}}</td>
+                <td>
+                  <p-checkbox [(ngModel)]="property.isNullable" [binary]="true" [disabled]="true"></p-checkbox>
+                </td>
+                <td>
+                  <p-checkbox [(ngModel)]="property.isRelationalProperty" [binary]="true"
+                              [disabled]="true"></p-checkbox>
+                </td>
+                <td>{{property.relationalEntity?.name}}</td>
+                <td>
+                  <button pButton pRipple type="button" icon="pi pi-info-circle" [matMenuTriggerFor]="entityActionsMenu"
+                          class="p-button-rounded p-button-text"></button>
+                  <mat-menu #entityActionsMenu>
+                    <menu mat-menu-item>Details</menu>
+                    <menu mat-menu-item>Properties</menu>
+                  </mat-menu>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

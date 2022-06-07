@@ -44,6 +44,8 @@ import {CreateEntityComponent} from './components/entity/create-entity/create-en
 import {CheckboxModule} from "primeng/checkbox";
 import {MatMenuModule} from '@angular/material/menu';
 import { EntityDetailsComponent } from './components/entity/entity-details/entity-details.component';
+import { PropertyComponent } from './components/property/property.component';
+import { CreatePropertyComponent } from './components/property/create-property/create-property.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { EntityDetailsComponent } from './components/entity/entity-details/entit
     EntityComponent,
     ProjectDetailsComponent,
     CreateEntityComponent,
-    EntityDetailsComponent
+    EntityDetailsComponent,
+    PropertyComponent,
+    CreatePropertyComponent
   ],
   imports: [
     BrowserModule,
