@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ToggleSideBarService} from "../toggle-side-bar.service";
 import {MenuItem} from "primeng/api";
 import {ProjectService} from "../../../services/projects/project.service";
@@ -11,7 +11,6 @@ import {MenuItemContent} from "primeng/menu";
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  visibleSideBar: boolean;
   items: MenuItem[];
 
   constructor(private _toggleSideBarService: ToggleSideBarService,
@@ -70,8 +69,21 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this._toggleSideBarService.sideBarToggle.subscribe(visible => {
       this.getProjects();
-      this.visibleSideBar = visible;
     })
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    let sidebarMenu = document.getElementById("sidebarMenu");
+    let routerOutlet = document.getElementById("routerOutlet");
+
+    if (event.target.innerWidth <= 1000) {
+      sidebarMenu!.style.visibility = 'hidden';
+      routerOutlet!.style.marginLeft = '10px';
+    } else {
+      sidebarMenu!.style.visibility = 'visible';
+      routerOutlet!.style.marginLeft = '310px';
+    }
   }
 
 }

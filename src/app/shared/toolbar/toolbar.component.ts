@@ -63,7 +63,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   toggleSideBar() {
-    this.router.navigate(['home']);
-    //this._toggleSideBarService.sideBarToggle.emit(!this.sideBarVisible);
+    //this.router.navigate(['home']);
+    this._toggleSideBarService.sideBarToggle.emit(!this.sideBarVisible);
   }
 }

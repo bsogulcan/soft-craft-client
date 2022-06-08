@@ -27,10 +27,10 @@
                 <th>Property Type</th>
                 <th>Name</th>
                 <th>Display Name</th>
-                <th>Nullable</th>
                 <th>Relational Entity Name</th>
                 <th>ToolTip</th>
                 <th>Max Length</th>
+                <th>Nullable</th>
                 <th>Required</th>
                 <th>Unique</th>
                 <th>Indexed</th>
@@ -42,13 +42,13 @@
                 <td>{{getPropertyTypeName(property.type)}}</td>
                 <td>{{property.name}}</td>
                 <td>{{property.displayName}}</td>
-                <td>
-                  <p-checkbox [(ngModel)]="property.isNullable" [binary]="true" [disabled]="true"></p-checkbox>
-                </td>
                 <td>{{property.relationalEntity?.name}}</td>
 
                 <td>{{property.toolTip}}</td>
                 <td>{{property.maxLength}}</td>
+                <td>
+                  <p-checkbox [(ngModel)]="property.isNullable" [binary]="true" [disabled]="true"></p-checkbox>
+                </td>
                 <td>
                   <p-checkbox [(ngModel)]="property.required" [binary]="true"
                               [disabled]="true"></p-checkbox>

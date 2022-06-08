@@ -7,6 +7,7 @@ import {appModuleAnimation} from "../../../shared/animations/routerTransition";
 import {EntityFullOutput} from "../../../services/entity/dtos/EntityFullOutput";
 import {PropertyType} from "../../../services/enums/PropertyType";
 import {GetEntityListInput} from "../../../services/entity/dtos/GetEntityListInput";
+import {UpdatePropertyInput} from "../../../services/property/dtos/UpdatePropertyInput";
 
 @Component({
   selector: 'app-edit-property',
@@ -50,10 +51,19 @@ export class EditPropertyComponent implements OnInit {
   }
 
   save() {
+    const updatePropertyInput = new UpdatePropertyInput();
+    // @ts-ignore
+    this.property.type = PropertyType[this.selectedPropertyType];
+
+    this.propertyService.update(this.property.id, this.property).subscribe(response => {
+      if (response) {
+        this.close(response);
+      }
+    })
 
   }
 
-  close() {
-    this.ref.close();
+  close(data?:any) {
+    this.ref.close(data);
   }
 }
