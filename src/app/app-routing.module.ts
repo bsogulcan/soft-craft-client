@@ -9,6 +9,7 @@ import {ProjectDetailsComponent} from "./components/project/project-details/proj
 import {CreateEntityComponent} from "./components/entity/create-entity/create-entity.component";
 import {EntityDetailsComponent} from "./components/entity/entity-details/entity-details.component";
 import {PropertyComponent} from "./components/property/property.component";
+import {NavigationComponent} from "./components/navigation/navigation.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'project/:projectId/create-entity', component: CreateEntityComponent},
   {path: 'project/:projectId/entity/:entityId/details', component: EntityDetailsComponent},
   {path: 'project/:projectId/entity/:entityId/properties', component: PropertyComponent},
+  {path: 'project/:projectId/navigations', component: NavigationComponent},
 ];
 
 @NgModule({
