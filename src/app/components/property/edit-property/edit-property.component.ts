@@ -8,6 +8,7 @@ import {EntityFullOutput} from "../../../services/entity/dtos/EntityFullOutput";
 import {PropertyType} from "../../../services/enums/PropertyType";
 import {GetEntityListInput} from "../../../services/entity/dtos/GetEntityListInput";
 import {UpdatePropertyInput} from "../../../services/property/dtos/UpdatePropertyInput";
+import {RelationType} from "../../../services/enums/RelationType";
 
 @Component({
   selector: 'app-edit-property',
@@ -18,9 +19,13 @@ import {UpdatePropertyInput} from "../../../services/property/dtos/UpdatePropert
 export class EditPropertyComponent implements OnInit {
   property: PropertyFullOutput;
   propertyTypes: string[];
+  relationTypes: string[];
   selectedPropertyType: string;
+  selectedRelationType: string;
   entities: Array<EntityFullOutput>;
   saving: boolean;
+  propertyType = PropertyType;
+  isNullableOrRequired: string = 'nullable';
 
   constructor(private ref: DynamicDialogRef,
               private config: DynamicDialogConfig,
@@ -28,6 +33,10 @@ export class EditPropertyComponent implements OnInit {
               private propertyService: PropertyService) {
 
     this.propertyTypes = Object.keys(PropertyType).filter((item) => {
+      return isNaN(Number(item));
+    });
+
+    this.relationTypes = Object.keys(RelationType).filter((item) => {
       return isNaN(Number(item));
     });
 
@@ -41,6 +50,7 @@ export class EditPropertyComponent implements OnInit {
       if (response) {
         this.property = response;
         this.selectedPropertyType = PropertyType[this.property.type];
+        this.selectedRelationType = RelationType[this.property.relationType];
         console.log(this.property)
       }
     })
@@ -48,6 +58,37 @@ export class EditPropertyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onPropertyTypeChanged(e: any) {
+    if (e.value && e.value != '') {
+      // @ts-ignore
+      this.property.type = PropertyType[e.value];
+    } else {
+      // @ts-ignore
+      this.property.type = undefined;
+    }
+  }
+
+  onIsRelationalPropertyChanged(e: any) {
+    if (e.checked) {
+      // @ts-ignore
+      this.property.type = undefined;
+      this.selectedPropertyType = '';
+    } else {
+      // @ts-ignore
+      this.property.relationalEntityId = undefined;
+    }
+  }
+
+  onSelectedRelationTypeChange(e: any) {
+    if (e.value && e.value != '') {
+      // @ts-ignore
+      this.property.relationType = RelationType[e.value];
+    } else {
+      // @ts-ignore
+      this.property.relationType = undefined;
+    }
   }
 
   save() {
@@ -63,7 +104,7 @@ export class EditPropertyComponent implements OnInit {
 
   }
 
-  close(data?:any) {
+  close(data?: any) {
     this.ref.close(data);
   }
 }

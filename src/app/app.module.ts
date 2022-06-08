@@ -48,6 +48,7 @@ import { PropertyComponent } from './components/property/property.component';
 import { CreatePropertyComponent } from './components/property/create-property/create-property.component';
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import { EditPropertyComponent } from './components/property/edit-property/edit-property.component';
+import {RadioButtonModule} from "primeng/radiobutton";
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { EditPropertyComponent } from './components/property/edit-property/edit-
         ListboxModule,
         CheckboxModule,
         MatMenuModule,
-        ScrollPanelModule
+        ScrollPanelModule,
+        RadioButtonModule
     ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

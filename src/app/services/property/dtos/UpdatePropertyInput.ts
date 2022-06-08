@@ -1,4 +1,5 @@
 import {PropertyType} from "../../enums/PropertyType";
+import {RelationType} from "../../enums/RelationType";
 
 export class UpdatePropertyInput {
   id: number;
@@ -9,6 +10,7 @@ export class UpdatePropertyInput {
   entityId: number;
   isRelationalProperty: boolean;
   relationalEntityId: number;
+  relationType: RelationType;
   toolTip: string;
   required: boolean;
   indexed: boolean;

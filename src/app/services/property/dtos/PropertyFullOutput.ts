@@ -1,5 +1,6 @@
 import {PropertyType} from "../../enums/PropertyType";
 import {EntityFullOutput} from "../../entity/dtos/EntityFullOutput";
+import {RelationType} from "../../enums/RelationType";
 
 export class PropertyFullOutput {
   id: number;
@@ -12,6 +13,7 @@ export class PropertyFullOutput {
   isRelationalProperty: boolean;
   relationalEntityId: number;
   relationalEntity: EntityFullOutput | undefined;
+  relationType: RelationType;
   toolTip: string;
   required: boolean;
   indexed: boolean;
