@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {appModuleAnimation} from "../../shared/animations/routerTransition";
-import {TreeNode} from "primeng/api";
+import {ConfirmationService, TreeNode} from "primeng/api";
 import {NavigationService} from "../../services/navigation/navigation.service";
 import {GetNavigationListInput} from "../../services/navigation/dtos/GetNavigationListInput";
 import {ActivatedRoute} from "@angular/router";
@@ -8,6 +8,7 @@ import {NavigationFullOutput} from "../../services/navigation/dtos/NavigationFul
 import {CreatePropertyComponent} from "../property/create-property/create-property.component";
 import {DialogService} from "primeng/dynamicdialog";
 import {CreateNavigationComponent} from "./create-navigation/create-navigation.component";
+import {UpdateNavigationComponent} from "./update-navigation/update-navigation.component";
 
 @Component({
   selector: 'app-navigation',
@@ -22,7 +23,8 @@ export class NavigationComponent implements OnInit {
 
   constructor(private navigationService: NavigationService,
               private route: ActivatedRoute,
-              public dialogService: DialogService) {
+              public dialogService: DialogService,
+              private confirmationService: ConfirmationService) {
     route.params.subscribe(param => {
       if (param["projectId"]) {
         this.projectId = parseInt(param["projectId"]);
@@ -93,5 +95,36 @@ export class NavigationComponent implements OnInit {
     }
 
     return treeNode;
+  }
+
+  deleteProperty(propertyId: number) {
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this record?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.navigationService.delete(propertyId).subscribe(response => {
+          this.getNavigations()
+        })
+      },
+      key: "positionDialog"
+    });
+  }
+
+  updateNavigation(id: number) {
+    const ref = this.dialogService.open(UpdateNavigationComponent, {
+      data: {
+        projectId: this.projectId,
+        navigationId: id
+      },
+      header: 'Edit Navigation',
+      width: '40%'
+    });
+
+    ref.onClose.subscribe(response => {
+      if (response) {
+        this.getNavigations();
+      }
+    })
   }
 }

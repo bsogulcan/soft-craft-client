@@ -51,8 +51,16 @@
                   </button>
                   <mat-menu #entityActionsMenu>
                     <menu mat-menu-item class="m-0" (click)="newNavigation(rowData.id)">
-                      <mat-icon>keyboard_arrow_right</mat-icon>
+                      <mat-icon>open_in_new</mat-icon>
                       <span>Add Child</span>
+                    </menu>
+                    <menu mat-menu-item class="m-0" (click)="updateNavigation(rowData.id)">
+                      <mat-icon>edit</mat-icon>
+                      <span>Update</span>
+                    </menu>
+                    <menu mat-menu-item class="m-0" (click)="deleteProperty(rowData.id)">
+                      <mat-icon>delete</mat-icon>
+                      <span>Delete</span>
                     </menu>
                   </mat-menu>
                 </td>
@@ -63,4 +71,5 @@
       </div>
     </div>
   </div>
+
 </div>

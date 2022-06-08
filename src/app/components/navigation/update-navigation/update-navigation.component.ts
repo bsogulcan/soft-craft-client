@@ -1,22 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {appModuleAnimation} from "../../../shared/animations/routerTransition";
-import {CreateNavigationInput} from "../../../services/navigation/dtos/CreateNavigationInput";
-import {EntityFullOutput} from "../../../services/entity/dtos/EntityFullOutput";
-import {EntityService} from "../../../services/entity/entity.service";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
+import {EntityService} from "../../../services/entity/entity.service";
+import {PropertyService} from "../../../services/property/property.service";
 import {NavigationService} from "../../../services/navigation/navigation.service";
+import {NavigationFullOutput} from "../../../services/navigation/dtos/NavigationFullOutput";
 import {GetEntityListInput} from "../../../services/entity/dtos/GetEntityListInput";
+import {EntityFullOutput} from "../../../services/entity/dtos/EntityFullOutput";
 
 @Component({
-  selector: 'app-create-navigation',
-  templateUrl: './create-navigation.component.html',
-  styleUrls: ['./create-navigation.component.css'],
+  selector: 'app-update-navigation',
+  templateUrl: './update-navigation.component.html',
+  styleUrls: ['./update-navigation.component.css'],
   animations: [appModuleAnimation()],
 })
-export class CreateNavigationComponent implements OnInit {
-  navigation = new CreateNavigationInput();
-  entities: Array<EntityFullOutput>;
+export class UpdateNavigationComponent implements OnInit {
+  navigationId: number;
+  navigation: NavigationFullOutput;
   projectId: number;
+  entities: Array<EntityFullOutput>;
 
   constructor(private ref: DynamicDialogRef,
               private config: DynamicDialogConfig,
@@ -24,6 +26,13 @@ export class CreateNavigationComponent implements OnInit {
               private navigationService: NavigationService
   ) {
     this.projectId = parseInt(config.data.projectId);
+    this.navigationId = parseInt(config.data.navigationId);
+
+    navigationService.get(this.navigationId).subscribe(response => {
+      if (response) {
+        this.navigation = response;
+      }
+    });
 
     const getEntityListInput = new GetEntityListInput();
     getEntityListInput.projectId = this.projectId
@@ -31,20 +40,13 @@ export class CreateNavigationComponent implements OnInit {
       this.entities = response.items;
     });
 
-    if (config.data.parentNavigationId) {
-      this.navigation.parentNavigationId = parseInt(config.data.parentNavigationId);
-    }
-
-    this.navigation.projectId = this.projectId;
-
-
   }
 
   ngOnInit(): void {
   }
 
   save() {
-    this.navigationService.create(this.navigation).subscribe(response => {
+    this.navigationService.update(this.navigation.id, this.navigation).subscribe(response => {
       if (response) {
         this.ref.close(response);
       }
