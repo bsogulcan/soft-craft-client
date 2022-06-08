@@ -51,6 +51,8 @@ import { EditPropertyComponent } from './components/property/edit-property/edit-
 import {RadioButtonModule} from "primeng/radiobutton";
 import { NavigationComponent } from './components/navigation/navigation.component';
 import {TreeTableModule} from "primeng/treetable";
+import { CreateNavigationComponent } from './components/navigation/create-navigation/create-navigation.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import {TreeTableModule} from "primeng/treetable";
     PropertyComponent,
     CreatePropertyComponent,
     EditPropertyComponent,
-    NavigationComponent
+    NavigationComponent,
+    CreateNavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +107,8 @@ import {TreeTableModule} from "primeng/treetable";
     MatMenuModule,
     ScrollPanelModule,
     RadioButtonModule,
-    TreeTableModule
+    TreeTableModule,
+    MatIconModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

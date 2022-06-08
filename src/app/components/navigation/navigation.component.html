@@ -25,13 +25,14 @@
     <div class="col-12">
       <div class="grid">
         <div class="col-12">
-          <p-treeTable [value]="navigations">
+          <p-treeTable [value]="navigations" styleClass="p-datatable-sm">
             <ng-template pTemplate="header">
               <tr>
                 <th>Caption</th>
                 <th>Index</th>
                 <th>Visible</th>
                 <th>Icon</th>
+                <th>Actions</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
@@ -43,6 +44,18 @@
                 <td>{{rowData.index}}</td>
                 <td>{{rowData.visible}}</td>
                 <td><i class="{{rowData.icon}}"></i></td>
+                <td>
+                  <button pButton pRipple type="button" [matMenuTriggerFor]="entityActionsMenu"
+                          class="p-button-secondary p-button-text" style="height: 20px">
+                    <mat-icon>dehaze</mat-icon>
+                  </button>
+                  <mat-menu #entityActionsMenu>
+                    <menu mat-menu-item class="m-0" (click)="newNavigation(rowData.id)">
+                      <mat-icon>keyboard_arrow_right</mat-icon>
+                      <span>Add Child</span>
+                    </menu>
+                  </mat-menu>
+                </td>
               </tr>
             </ng-template>
           </p-treeTable>

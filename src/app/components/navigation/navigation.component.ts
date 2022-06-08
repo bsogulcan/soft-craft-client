@@ -5,45 +5,28 @@ import {NavigationService} from "../../services/navigation/navigation.service";
 import {GetNavigationListInput} from "../../services/navigation/dtos/GetNavigationListInput";
 import {ActivatedRoute} from "@angular/router";
 import {NavigationFullOutput} from "../../services/navigation/dtos/NavigationFullOutput";
+import {CreatePropertyComponent} from "../property/create-property/create-property.component";
+import {DialogService} from "primeng/dynamicdialog";
+import {CreateNavigationComponent} from "./create-navigation/create-navigation.component";
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css'],
-  animations: [appModuleAnimation()]
+  animations: [appModuleAnimation()],
+  providers: [DialogService]
 })
 export class NavigationComponent implements OnInit {
   navigations: TreeNode[];
+  projectId: number;
 
   constructor(private navigationService: NavigationService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public dialogService: DialogService) {
     route.params.subscribe(param => {
       if (param["projectId"]) {
-        const getNavigationListInput = new GetNavigationListInput();
-        getNavigationListInput.projectId = param["projectId"];
-        navigationService.getAll(getNavigationListInput).subscribe(response => {
-          console.log(response);
-          const treeNodes = new Array<TreeNode>();
-          if (response) {
-            response.items.filter(x => !x.parentNavigationId).forEach(navigationItem => {
-              let treeNode: TreeNode;
-              treeNode = {
-                data: navigationItem
-              };
-
-              treeNode.children = [];
-              navigationItem.navigations.forEach(childNavigations => {
-                treeNode.children!.push(this.getChildren(childNavigations));
-              })
-
-              treeNodes.push(treeNode);
-            });
-            console.log(treeNodes);
-
-            this.navigations = treeNodes;
-            console.log(this.navigations)
-          }
-        })
+        this.projectId = parseInt(param["projectId"]);
+        this.getNavigations();
       }
     })
   }
@@ -51,8 +34,49 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  newNavigation() {
+  getNavigations() {
+    const getNavigationListInput = new GetNavigationListInput();
+    getNavigationListInput.projectId = this.projectId;
+    this.navigationService.getAll(getNavigationListInput).subscribe(response => {
+      console.log(response);
+      const treeNodes = new Array<TreeNode>();
+      if (response) {
+        response.items.filter(x => !x.parentNavigationId).forEach(navigationItem => {
+          let treeNode: TreeNode;
+          treeNode = {
+            data: navigationItem
+          };
 
+          treeNode.children = [];
+          navigationItem.navigations.forEach(childNavigations => {
+            treeNode.children!.push(this.getChildren(childNavigations));
+          })
+
+          treeNodes.push(treeNode);
+        });
+        console.log(treeNodes);
+
+        this.navigations = treeNodes;
+        console.log(this.navigations)
+      }
+    })
+  }
+
+  newNavigation(navigationId?: number) {
+    const ref = this.dialogService.open(CreateNavigationComponent, {
+      data: {
+        projectId: this.projectId,
+        parentNavigationId: navigationId
+      },
+      header: 'New Navigation',
+      width: '40%'
+    });
+
+    ref.onClose.subscribe(response => {
+      if (response) {
+        this.getNavigations();
+      }
+    })
   }
 
   getChildren(navigation: NavigationFullOutput) {
@@ -70,5 +94,4 @@ export class NavigationComponent implements OnInit {
 
     return treeNode;
   }
-
 }

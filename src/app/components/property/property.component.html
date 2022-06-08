@@ -21,7 +21,7 @@
     <div class="col-12">
       <div class="grid">
         <div class="col-12">
-          <p-table [value]="properties" responsiveLayout="scroll">
+          <p-table [value]="properties" responsiveLayout="scroll" styleClass="p-datatable-sm">
             <ng-template pTemplate="header">
               <tr>
                 <th>Property Type</th>
@@ -62,11 +62,19 @@
                               [disabled]="true"></p-checkbox>
                 </td>
                 <td>
-                  <button pButton pRipple type="button" icon="pi pi-info-circle" [matMenuTriggerFor]="entityActionsMenu"
-                          class="p-button-rounded p-button-text"></button>
+                  <button pButton pRipple type="button" [matMenuTriggerFor]="entityActionsMenu"
+                          class="p-button-secondary p-button-text" style="height: 20px">
+                    <mat-icon>dehaze</mat-icon>
+                  </button>
                   <mat-menu #entityActionsMenu>
-                    <menu mat-menu-item (click)="updateProperty(property.id)">Update</menu>
-                    <menu mat-menu-item (click)="deleteProperty(property.id)">Delete</menu>
+                    <menu mat-menu-item class="m-0" (click)="updateProperty(property.id)">
+                      <mat-icon>edit</mat-icon>
+                      <span>Update</span>
+                    </menu>
+                    <menu mat-menu-item class="m-0" (click)="deleteProperty(property.id)">
+                      <mat-icon>delete</mat-icon>
+                      <span>Delete</span>
+                    </menu>
                   </mat-menu>
                 </td>
 

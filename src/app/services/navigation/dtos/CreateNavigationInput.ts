@@ -1,7 +1,7 @@
 export class CreateNavigationInput {
   caption: string;
   index: number;
-  visible: boolean;
+  visible: boolean = true;
   parentNavigationId: number | null;
   icon: string;
   projectId: number | null;

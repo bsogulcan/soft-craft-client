@@ -24,7 +24,7 @@
     <div class="col-12">
       <div class="grid">
         <div class="col-12">
-          <p-table [value]="entities" responsiveLayout="scroll">
+          <p-table [value]="entities" responsiveLayout="scroll" styleClass="p-datatable-sm">
             <ng-template pTemplate="header">
               <tr>
                 <th>Primary Type</th>
@@ -45,11 +45,19 @@
                 </td>
                 <td>{{getTenantTypeName(entity.tenantType)}}</td>
                 <td>
-                  <button pButton pRipple type="button" icon="pi pi-info-circle" [matMenuTriggerFor]="entityActionsMenu"
-                          class="p-button-rounded p-button-text"></button>
+                  <button pButton pRipple type="button" [matMenuTriggerFor]="entityActionsMenu"
+                          class="p-button-secondary p-button-text" style="height: 20px">
+                    <mat-icon>dehaze</mat-icon>
+                  </button>
                   <mat-menu #entityActionsMenu>
-                    <menu mat-menu-item (click)="entityDetails(entity.id)">Details</menu>
-                    <menu mat-menu-item (click)="entityProperties(entity.id)">Properties</menu>
+                    <menu mat-menu-item class="m-0" (click)="entityDetails(entity.id)">
+                      <mat-icon>info</mat-icon>
+                      <span>Details</span>
+                    </menu>
+                    <menu mat-menu-item class="m-0" (click)="entityProperties(entity.id)">
+                      <mat-icon>settings</mat-icon>
+                      <span>Properties</span>
+                      </menu>
                   </mat-menu>
                 </td>
               </tr>
