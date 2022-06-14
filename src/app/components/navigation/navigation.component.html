@@ -29,9 +29,9 @@
             <ng-template pTemplate="header">
               <tr>
                 <th>Caption</th>
-                <th>Index</th>
                 <th>Visible</th>
                 <th>Icon</th>
+                <th>Index</th>
                 <th>Actions</th>
               </tr>
             </ng-template>
@@ -41,9 +41,9 @@
                   <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
                   {{rowData.caption}}
                 </td>
-                <td>{{rowData.index}}</td>
                 <td>{{rowData.visible}}</td>
                 <td><i class="{{rowData.icon}}"></i></td>
+                <td>{{rowData.index}}</td>
                 <td>
                   <button pButton pRipple type="button" [matMenuTriggerFor]="entityActionsMenu"
                           class="p-button-secondary p-button-text" style="height: 20px">
@@ -53,6 +53,10 @@
                     <menu mat-menu-item class="m-0" (click)="newNavigation(rowData.id)">
                       <mat-icon>open_in_new</mat-icon>
                       <span>Add Child</span>
+                    </menu>
+                    <menu mat-menu-item class="m-0" (click)="reOrderNavigations(rowData.parentNavigationId)">
+                      <mat-icon>reorder</mat-icon>
+                      <span>ReOrder</span>
                     </menu>
                     <menu mat-menu-item class="m-0" (click)="updateNavigation(rowData.id)">
                       <mat-icon>edit</mat-icon>

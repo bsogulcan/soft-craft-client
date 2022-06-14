@@ -9,6 +9,7 @@ import {CreatePropertyComponent} from "../property/create-property/create-proper
 import {DialogService} from "primeng/dynamicdialog";
 import {CreateNavigationComponent} from "./create-navigation/create-navigation.component";
 import {UpdateNavigationComponent} from "./update-navigation/update-navigation.component";
+import {ReOrderNavigationComponent} from "./re-order-navigation/re-order-navigation.component";
 
 @Component({
   selector: 'app-navigation',
@@ -43,14 +44,19 @@ export class NavigationComponent implements OnInit {
       console.log(response);
       const treeNodes = new Array<TreeNode>();
       if (response) {
-        response.items.filter(x => !x.parentNavigationId).forEach(navigationItem => {
+        response.items.sort((a, b) => {
+          return a.index - b.index
+        }).filter(x => !x.parentNavigationId).forEach(navigationItem => {
           let treeNode: TreeNode;
           treeNode = {
-            data: navigationItem
+            data: navigationItem,
+            expanded: true
           };
 
           treeNode.children = [];
-          navigationItem.navigations.forEach(childNavigations => {
+          navigationItem.navigations.sort((a, b) => {
+            return a.index - b.index
+          }).forEach(childNavigations => {
             treeNode.children!.push(this.getChildren(childNavigations));
           })
 
@@ -85,11 +91,14 @@ export class NavigationComponent implements OnInit {
     let treeNode: TreeNode;
     treeNode = {
       data: navigation,
+      expanded: true
     }
 
     treeNode.children = [];
     if (navigation.navigations) {
-      navigation.navigations.forEach(navigationItem => {
+      navigation.navigations.sort((a, b) => {
+        return a.index - b.index
+      }).forEach(navigationItem => {
         treeNode.children!.push(this.getChildren(navigationItem));
       });
     }
@@ -127,4 +136,22 @@ export class NavigationComponent implements OnInit {
       }
     })
   }
+
+  reOrderNavigations(parentNavigationId: number) {
+    const ref = this.dialogService.open(ReOrderNavigationComponent, {
+      data: {
+        projectId: this.projectId,
+        parentNavigationId: parentNavigationId,
+      },
+      header: 'Order Navigation',
+      width: '40%'
+    });
+
+    ref.onClose.subscribe(response => {
+      if (response) {
+        this.getNavigations();
+      }
+    })
+  }
+
 }

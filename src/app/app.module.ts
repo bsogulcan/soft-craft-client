@@ -54,6 +54,7 @@ import {TreeTableModule} from "primeng/treetable";
 import { CreateNavigationComponent } from './components/navigation/create-navigation/create-navigation.component';
 import {MatIconModule} from "@angular/material/icon";
 import { UpdateNavigationComponent } from './components/navigation/update-navigation/update-navigation.component';
+import { ReOrderNavigationComponent } from './components/navigation/re-order-navigation/re-order-navigation.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { UpdateNavigationComponent } from './components/navigation/update-naviga
     EditPropertyComponent,
     NavigationComponent,
     CreateNavigationComponent,
-    UpdateNavigationComponent
+    UpdateNavigationComponent,
+    ReOrderNavigationComponent
   ],
   imports: [
     BrowserModule,
