@@ -1,4 +1,5 @@
 import {ProjectDto} from "../../projects/dtos/ProjectDto";
+import {EnumerateValueFullOutput} from "../../enumerate-value/dtos/EnumerateValueFullOutput";
 
 export class EnumerateFullOutput {
   id: number;
@@ -6,4 +7,5 @@ export class EnumerateFullOutput {
   project: ProjectDto;
   name: string;
   displayName: string;
+  enumerateValues: EnumerateValueFullOutput[];
 }

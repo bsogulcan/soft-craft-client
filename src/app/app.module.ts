@@ -58,6 +58,10 @@ import { ReOrderNavigationComponent } from './components/navigation/re-order-nav
 import { EnumerateComponent } from './components/enumerate/enumerate.component';
 import { CreateEnumerateComponent } from './components/enumerate/create-enumerate/create-enumerate.component';
 import { IconComponent } from './components/icon/icon.component';
+import { EditEnumerateComponent } from './components/enumerate/edit-enumerate/edit-enumerate.component';
+import { EnumerateValueComponent } from './components/enumerate-value/enumerate-value.component';
+import { CreateEnumerateValueComponent } from './components/enumerate-value/create-enumerate-value/create-enumerate-value.component';
+import { EditEnumerateValueComponent } from './components/enumerate-value/edit-enumerate-value/edit-enumerate-value.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +85,11 @@ import { IconComponent } from './components/icon/icon.component';
     ReOrderNavigationComponent,
     EnumerateComponent,
     CreateEnumerateComponent,
-    IconComponent
+    IconComponent,
+    EditEnumerateComponent,
+    EnumerateValueComponent,
+    CreateEnumerateValueComponent,
+    EditEnumerateValueComponent
   ],
   imports: [
     BrowserModule,

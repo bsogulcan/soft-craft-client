@@ -11,6 +11,7 @@ import {EntityDetailsComponent} from "./components/entity/entity-details/entity-
 import {PropertyComponent} from "./components/property/property.component";
 import {NavigationComponent} from "./components/navigation/navigation.component";
 import {EnumerateComponent} from "./components/enumerate/enumerate.component";
+import {EnumerateValueComponent} from "./components/enumerate-value/enumerate-value.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'project/:projectId/entity/:entityId/properties', component: PropertyComponent},
   {path: 'project/:projectId/navigations', component: NavigationComponent},
   {path: 'project/:projectId/enumerates', component: EnumerateComponent},
+  {path: 'project/:projectId/enumerate/:enumerateId/values', component: EnumerateValueComponent},
 ];
 
 @NgModule({
