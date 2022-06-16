@@ -52,11 +52,6 @@ export class SidebarComponent implements OnInit {
                 label: 'Enumerates',
                 icon: 'pi pi-pencil',
                 routerLink: '/project/' + project.id + '/enumerates'
-              },
-              {
-                label: 'Localizations',
-                icon: 'pi pi-code',
-                routerLink: '/project/' + project.id + '/localizations'
               }
             ]
           })

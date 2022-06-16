@@ -1,0 +1,8 @@
+<p-listbox [options]="icons" [metaKeySelection]="false" [filter]="true" [multiple]="false"
+           [listStyle]="{'max-height':'250px'}" [style]="{'width':'15rem'}" (onClick)="iconSelected($event)">
+  <ng-template let-icon pTemplate="item">
+    <div><i class="{{icon}}" aria-hidden="true"></i> {{icon}}</div>
+  </ng-template>
+</p-listbox>
+
+

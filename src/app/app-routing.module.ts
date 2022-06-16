@@ -10,6 +10,7 @@ import {CreateEntityComponent} from "./components/entity/create-entity/create-en
 import {EntityDetailsComponent} from "./components/entity/entity-details/entity-details.component";
 import {PropertyComponent} from "./components/property/property.component";
 import {NavigationComponent} from "./components/navigation/navigation.component";
+import {EnumerateComponent} from "./components/enumerate/enumerate.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'project/:projectId/entity/:entityId/details', component: EntityDetailsComponent},
   {path: 'project/:projectId/entity/:entityId/properties', component: PropertyComponent},
   {path: 'project/:projectId/navigations', component: NavigationComponent},
+  {path: 'project/:projectId/enumerates', component: EnumerateComponent},
 ];
 
 @NgModule({

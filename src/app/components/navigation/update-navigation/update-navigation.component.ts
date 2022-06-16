@@ -1,18 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {appModuleAnimation} from "../../../shared/animations/routerTransition";
-import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
+import {DialogService, DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {EntityService} from "../../../services/entity/entity.service";
 import {PropertyService} from "../../../services/property/property.service";
 import {NavigationService} from "../../../services/navigation/navigation.service";
 import {NavigationFullOutput} from "../../../services/navigation/dtos/NavigationFullOutput";
 import {GetEntityListInput} from "../../../services/entity/dtos/GetEntityListInput";
 import {EntityFullOutput} from "../../../services/entity/dtos/EntityFullOutput";
+import {IconComponent} from "../../icon/icon.component";
 
 @Component({
   selector: 'app-update-navigation',
   templateUrl: './update-navigation.component.html',
   styleUrls: ['./update-navigation.component.css'],
   animations: [appModuleAnimation()],
+  providers: [DialogService]
 })
 export class UpdateNavigationComponent implements OnInit {
   navigationId: number;
@@ -23,6 +25,7 @@ export class UpdateNavigationComponent implements OnInit {
   constructor(private ref: DynamicDialogRef,
               private config: DynamicDialogConfig,
               private entityService: EntityService,
+              public dialogService: DialogService,
               private navigationService: NavigationService
   ) {
     this.projectId = parseInt(config.data.projectId);
@@ -49,6 +52,21 @@ export class UpdateNavigationComponent implements OnInit {
     this.navigationService.update(this.navigation.id, this.navigation).subscribe(response => {
       if (response) {
         this.ref.close(response);
+      }
+    })
+  }
+
+  openIconList() {
+    const ref = this.dialogService.open(IconComponent, {
+      data: {
+        iconName: this.navigation.icon
+      },
+      header: 'Icons',
+    });
+
+    ref.onClose.subscribe(response => {
+      if (response) {
+        this.navigation.icon = response;
       }
     })
   }

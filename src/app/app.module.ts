@@ -55,6 +55,9 @@ import { CreateNavigationComponent } from './components/navigation/create-naviga
 import {MatIconModule} from "@angular/material/icon";
 import { UpdateNavigationComponent } from './components/navigation/update-navigation/update-navigation.component';
 import { ReOrderNavigationComponent } from './components/navigation/re-order-navigation/re-order-navigation.component';
+import { EnumerateComponent } from './components/enumerate/enumerate.component';
+import { CreateEnumerateComponent } from './components/enumerate/create-enumerate/create-enumerate.component';
+import { IconComponent } from './components/icon/icon.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,10 @@ import { ReOrderNavigationComponent } from './components/navigation/re-order-nav
     NavigationComponent,
     CreateNavigationComponent,
     UpdateNavigationComponent,
-    ReOrderNavigationComponent
+    ReOrderNavigationComponent,
+    EnumerateComponent,
+    CreateEnumerateComponent,
+    IconComponent
   ],
   imports: [
     BrowserModule,
