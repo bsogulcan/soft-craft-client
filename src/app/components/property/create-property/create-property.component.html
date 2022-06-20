@@ -1,29 +1,42 @@
 <div class="p-fluid mt-2 ml-1" [@routerTransition]>
   <ul class="list-none p-0 m-0">
+
+    <li class="flex align-items-center py-3 px-2 border-bottom-1 surface-border flex-wrap">
+      <div class="text-500 w-6 md:w-2 font-medium">State</div>
+      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+        <p-selectButton [options]="propertyStateOptions"
+                        [(ngModel)]="selectedPropertyState"
+                        (onChange)="propertyStateChanged($event.value)"
+                        optionLabel="name"
+                        optionValue="value"></p-selectButton>
+      </div>
+    </li>
     <li class="flex align-items-center py-3 px-2  surface-border flex-wrap">
       <div class="text-500 w-6 md:w-2 font-medium">Type</div>
-      <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
-        <p-dropdown id="inputPropertyType" [options]="propertyTypes" *ngIf="!property.isRelationalProperty"
+      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+        <p-dropdown id="inputPropertyType" [options]="propertyTypes" *ngIf="selectedPropertyState==0"
                     [(ngModel)]="selectedPropertyType"
                     placeholder="Select Type"
                     (onChange)="onPropertyTypeChanged($event)"
                     [showClear]="true"></p-dropdown>
 
-        <p-dropdown [options]="this.entities" *ngIf="property.isRelationalProperty"
+        <p-dropdown [options]="this.entities" *ngIf="selectedPropertyState==1"
                     [(ngModel)]="property.relationalEntityId"
                     optionValue="id"
                     optionLabel="name"
                     placeholder="Select Entity"
                     [showClear]="true"></p-dropdown>
-      </div>
-      <div class="text-900 w-full md:w-1 md:flex-order-0 flex-order-1 ml-1">
-        <p-checkbox [(ngModel)]="property.isRelationalProperty" [binary]="true"
-                    (onChange)="onIsRelationalPropertyChanged($event)" label="Relational Property"
-                    inputId="binary"></p-checkbox>
+
+        <p-dropdown [options]="this.enumerates" *ngIf="selectedPropertyState==2"
+                    [(ngModel)]="property.enumerateId"
+                    optionValue="id"
+                    optionLabel="name"
+                    placeholder="Select Enumerate"
+                    [showClear]="true"></p-dropdown>
       </div>
     </li>
     <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap"
-        *ngIf="property.isRelationalProperty">
+        *ngIf="selectedPropertyState==1">
       <div class="text-500 w-6 md:w-2 font-medium">Relation Type</div>
       <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
         <p-dropdown id="inputRelationType" [options]="relationTypes"

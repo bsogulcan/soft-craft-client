@@ -8,6 +8,8 @@ import {EntityFullOutput} from "../../../services/entity/dtos/EntityFullOutput";
 import {EntityService} from "../../../services/entity/entity.service";
 import {GetEntityListInput} from "../../../services/entity/dtos/GetEntityListInput";
 import {RelationType} from "../../../services/enums/RelationType";
+import {EnumerateService} from "../../../services/enumerate/enumerate.service";
+import {EnumerateFullOutput} from "../../../services/enumerate/dtos/EnumerateFullOutput";
 
 @Component({
   selector: 'app-create-property',
@@ -19,17 +21,34 @@ export class CreatePropertyComponent implements OnInit {
   property: CreatePropertyInput = new CreatePropertyInput();
   propertyTypes: string[];
   relationTypes: string[];
-  selectedPropertyType: string = 'String';
+  selectedPropertyType: string | undefined = 'String';
   selectedRelationType: string;
   entities: Array<EntityFullOutput>;
   saving: boolean;
   propertyType = PropertyType;
   isNullableOrRequired: string = 'nullable';
+  enumerates: Array<EnumerateFullOutput>;
+  propertyStateOptions = [
+    {
+      name: 'Standart',
+      value: 0
+    },
+    {
+      name: 'Relational',
+      value: 1
+    },
+    {
+      name: 'Enumerate',
+      value: 2
+    },
+  ];
+  selectedPropertyState = 0;
 
   constructor(private ref: DynamicDialogRef,
               private config: DynamicDialogConfig,
               private entityService: EntityService,
-              private propertyService: PropertyService) {
+              private propertyService: PropertyService,
+              private enumerateService: EnumerateService) {
     this.property.entityId = config.data.entityId;
     this.propertyTypes = Object.keys(PropertyType).filter((item) => {
       return isNaN(Number(item));
@@ -45,6 +64,10 @@ export class CreatePropertyComponent implements OnInit {
     getEntityListInput.projectId = parseInt(config.data.projectId);
     entityService.getAll(getEntityListInput).subscribe(response => {
       this.entities = response.items;
+    });
+
+    enumerateService.getAll(getEntityListInput).subscribe(response => {
+      this.enumerates = response.items;
     });
   }
 
@@ -93,6 +116,31 @@ export class CreatePropertyComponent implements OnInit {
     } else {
       // @ts-ignore
       this.property.relationType = undefined;
+    }
+  }
+
+  propertyStateChanged(stateValue: number) {
+    switch (stateValue) {
+      case 0:
+        this.property.isRelationalProperty = false;
+        this.property.isEnumProperty = false;
+        this.property.enumerateId = undefined;
+        this.property.relationalEntityId = undefined;
+        break;
+      case 1:
+        this.selectedPropertyType = undefined;
+        this.property.type = undefined;
+        this.property.isRelationalProperty = true;
+        this.property.isEnumProperty = false;
+        this.property.enumerateId = undefined;
+        break;
+      case 2:
+        this.selectedPropertyType = undefined;
+        this.property.type = undefined;
+        this.property.isRelationalProperty = false;
+        this.property.isEnumProperty = true;
+        this.property.relationalEntityId = undefined;
+        break;
     }
   }
 }

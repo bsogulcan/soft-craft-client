@@ -4,6 +4,8 @@ import {CreateProjectDto} from "./dtos/CreateProjectDto";
 import {CrudAppService} from "../CrudAppService";
 import {ProjectDto} from "./dtos/ProjectDto";
 import {UpdateProjectDto} from "./dtos/UpdateProjectDto";
+import {GenerateProjectInput} from "./dtos/GenerateProjectInput";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +13,9 @@ import {UpdateProjectDto} from "./dtos/UpdateProjectDto";
 export class ProjectService extends CrudAppService<ProjectDto, undefined, CreateProjectDto, UpdateProjectDto> {
   constructor(private httpClient: HttpClient) {
     super("/api/app/project", httpClient);
+  }
+
+  generate(generateInput: GenerateProjectInput) {
+    return this.httpClient.post(environment.apiBaseUrl + '/api/app/project/generate', generateInput);
   }
 }

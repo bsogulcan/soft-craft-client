@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
             label: project.name,
             items: [
               {
-                label: 'Details',
+                label: 'Actions',
                 icon: 'pi pi-book',
                 routerLink: '/project/' + project.id + '/details'
               },

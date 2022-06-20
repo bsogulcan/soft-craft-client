@@ -9,6 +9,8 @@ import {PropertyType} from "../../../services/enums/PropertyType";
 import {GetEntityListInput} from "../../../services/entity/dtos/GetEntityListInput";
 import {UpdatePropertyInput} from "../../../services/property/dtos/UpdatePropertyInput";
 import {RelationType} from "../../../services/enums/RelationType";
+import {EnumerateFullOutput} from "../../../services/enumerate/dtos/EnumerateFullOutput";
+import {EnumerateService} from "../../../services/enumerate/enumerate.service";
 
 @Component({
   selector: 'app-edit-property',
@@ -20,17 +22,34 @@ export class EditPropertyComponent implements OnInit {
   property: PropertyFullOutput;
   propertyTypes: string[];
   relationTypes: string[];
-  selectedPropertyType: string;
+  selectedPropertyType: string | undefined;
   selectedRelationType: string;
   entities: Array<EntityFullOutput>;
   saving: boolean;
   propertyType = PropertyType;
   isNullableOrRequired: string = 'nullable';
+  enumerates: Array<EnumerateFullOutput>;
+  propertyStateOptions = [
+    {
+      name: 'Standart',
+      value: 0
+    },
+    {
+      name: 'Relational',
+      value: 1
+    },
+    {
+      name: 'Enumerate',
+      value: 2
+    },
+  ];
+  selectedPropertyState: number;
 
   constructor(private ref: DynamicDialogRef,
               private config: DynamicDialogConfig,
               private entityService: EntityService,
-              private propertyService: PropertyService) {
+              private propertyService: PropertyService,
+              private enumerateService: EnumerateService) {
 
     this.propertyTypes = Object.keys(PropertyType).filter((item) => {
       return isNaN(Number(item));
@@ -49,12 +68,24 @@ export class EditPropertyComponent implements OnInit {
     propertyService.get(config.data.propertyId).subscribe(response => {
       if (response) {
         this.property = response;
-        this.selectedPropertyType = PropertyType[this.property.type];
+        this.selectedPropertyType = PropertyType[this.property.type ? 0 : this.property.type!];
         this.selectedRelationType = RelationType[this.property.relationType];
+
+        if (!this.property.isRelationalProperty && !this.property.isEnumProperty) {
+          this.selectedPropertyState = 0;
+        } else if (this.property.isRelationalProperty) {
+          this.selectedPropertyState = 1
+        } else {
+          this.selectedPropertyState = 3;
+        }
+
         console.log(this.property)
       }
-    })
+    });
 
+    enumerateService.getAll(getEntityListInput).subscribe(response => {
+      this.enumerates = response.items;
+    });
   }
 
   ngOnInit(): void {
@@ -106,5 +137,30 @@ export class EditPropertyComponent implements OnInit {
 
   close(data?: any) {
     this.ref.close(data);
+  }
+
+  propertyStateChanged(stateValue: number) {
+    switch (stateValue) {
+      case 0:
+        this.property.isRelationalProperty = false;
+        this.property.isEnumProperty = false;
+        this.property.enumerateId = undefined;
+        this.property.relationalEntityId = undefined;
+        break;
+      case 1:
+        this.selectedPropertyType = undefined;
+        this.property.type = undefined;
+        this.property.isRelationalProperty = true;
+        this.property.isEnumProperty = false;
+        this.property.enumerateId = undefined;
+        break;
+      case 2:
+        this.selectedPropertyType = undefined;
+        this.property.type = undefined;
+        this.property.isRelationalProperty = false;
+        this.property.isEnumProperty = true;
+        this.property.relationalEntityId = undefined;
+        break;
+    }
   }
 }

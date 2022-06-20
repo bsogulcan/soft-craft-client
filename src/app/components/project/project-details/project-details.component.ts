@@ -5,6 +5,7 @@ import {ProjectService} from "../../../services/projects/project.service";
 import {ProjectDto} from "../../../services/projects/dtos/ProjectDto";
 import {ConfirmationService, MenuItem} from "primeng/api";
 import {ToggleSideBarService} from "../../../shared/sidebar/toggle-side-bar.service";
+import {GenerateProjectInput} from "../../../services/projects/dtos/GenerateProjectInput";
 
 @Component({
   selector: 'app-project-details',
@@ -31,6 +32,13 @@ export class ProjectDetailsComponent implements OnInit {
     this.projectOptions = [{
       label: 'Options',
       items: [
+        {
+          label: 'Generate',
+          icon: 'pi pi-play',
+          command: () => {
+            this.generateProject();
+          }
+        },
         {
           label: 'Delete',
           icon: 'pi pi-times',
@@ -77,5 +85,13 @@ export class ProjectDetailsComponent implements OnInit {
 
       }
     })
+  }
+
+  private generateProject() {
+    const generateProjectInput = new GenerateProjectInput();
+    generateProjectInput.id = this.project.id;
+    this.projectService.generate(generateProjectInput).subscribe(response => {
+
+    });
   }
 }
