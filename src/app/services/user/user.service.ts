@@ -16,4 +16,5 @@ export class UserService {
   getUserById(id: string) {
     return this.httpClient.get(environment.apiBaseUrl + this.endPoint + '/' + id);
   }
+
 }

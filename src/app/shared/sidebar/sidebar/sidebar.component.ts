@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ToggleSideBarService} from "../toggle-side-bar.service";
 import {MenuItem} from "primeng/api";
+import {ProjectService} from "../../../services/projects/project.service";
+import {BasePanelMenuItem} from "primeng/panelmenu";
+import {MenuItemContent} from "primeng/menu";
 
 @Component({
   selector: 'app-sidebar',
@@ -8,51 +11,74 @@ import {MenuItem} from "primeng/api";
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  visibleSideBar: boolean;
   items: MenuItem[];
 
-  constructor(private _toggleSideBarService: ToggleSideBarService) {
-    this.items = [
-      {
-        label: 'Home Page',
-        icon: 'pi pi-home',
-        routerLink: '/'
-      },
-      {
-        label: 'Projects',
-        icon: 'pi pi-fw pi-plus',
-        routerLink: '/projects'
-      },
-      /* {
-         label: 'Tenants',
-         icon: 'pi pi-home',
-         routerLink: '/main'
-       },
-       {
-         label: 'Users',
-         icon: 'pi pi-user',
-         routerLink: '/main'
-       },
-       {
-         label: 'Roles',
-         icon: 'pi pi-home',
-         routerLink: '/main'
-       },
-       {
-         label: 'New',
-         icon: 'pi pi-fw pi-plus',
-         items: [
-           {label: 'User', icon: 'pi pi-fw pi-user-plus', routerLink: '/'},
-           {label: 'Filter', icon: 'pi pi-fw pi-filter', routerLink: '/home'}
-         ]
-       }*/
-    ];
+  constructor(private _toggleSideBarService: ToggleSideBarService,
+              private _projectService: ProjectService) {
+
+    this.getProjects();
+  }
+
+  getProjects() {
+    let menuItems: MenuItem[] = [{
+      label: 'Create a Project',
+      icon: 'pi pi-plus',
+      routerLink: '/new-project'
+    }];
+
+
+    this._projectService.getAll().subscribe(response => {
+      if (response) {
+        response.items.forEach(project => {
+          menuItems.push({
+            label: project.name,
+            items: [
+              {
+                label: 'Actions',
+                icon: 'pi pi-book',
+                routerLink: '/project/' + project.id + '/details'
+              },
+              {
+                label: 'Entities',
+                icon: 'pi pi-database',
+                routerLink: '/project/' + project.id + '/entities'
+              },
+              {
+                label: 'Navigations',
+                icon: 'pi pi-fw pi-external-link',
+                routerLink: '/project/' + project.id + '/navigations'
+              },
+              {
+                label: 'Enumerates',
+                icon: 'pi pi-pencil',
+                routerLink: '/project/' + project.id + '/enumerates'
+              }
+            ]
+          })
+        })
+        this.items = menuItems;
+      }
+    })
   }
 
   ngOnInit(): void {
     this._toggleSideBarService.sideBarToggle.subscribe(visible => {
-      this.visibleSideBar = visible;
+      this.getProjects();
     })
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    let sidebarMenu = document.getElementById("sidebarMenu");
+    let routerOutlet = document.getElementById("routerOutlet");
+
+    if (event.target.innerWidth <= 1000) {
+      sidebarMenu!.style.visibility = 'hidden';
+      routerOutlet!.style.marginLeft = '10px';
+    } else {
+      sidebarMenu!.style.visibility = 'visible';
+      routerOutlet!.style.marginLeft = '310px';
+    }
   }
 
 }

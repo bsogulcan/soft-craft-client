@@ -1,8 +1,9 @@
 export class UpdateProjectDto {
   id: number;
   name: string;
-  description: string;
-  normalizedName: string;
+  uniqueName: string;
+  multiTenant: boolean;
+  webAddress: string;
   port: number;
-
+  logType: number;
 }

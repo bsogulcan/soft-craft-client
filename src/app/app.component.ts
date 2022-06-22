@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {PrimeNGConfig} from "primeng/api";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent {
   title = 'SoftCraft';
+
+  constructor(private primengConfig: PrimeNGConfig) {
+    this.primengConfig.ripple = true;
+  }
 }
