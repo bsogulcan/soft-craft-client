@@ -1,8 +1,9 @@
 import {AuthConfig} from 'angular-oauth2-oidc';
+import {environment} from "../../environments/environment";
 
 export const authConfig: AuthConfig = {
-  issuer: 'https://localhost:44366',
-  redirectUri: 'http://localhost:4200',
+  issuer: environment.apiBaseUrl,
+  redirectUri: environment.baseUrl,
   clientId: 'SoftCraft_App',
   responseType: 'code',
   scope: 'offline_access SoftCraft',

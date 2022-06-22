@@ -1,0 +1,32 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.14.2
+        cache: 'npm'
+    - name: Build and Deploy
+      run: |
+        Stop-WebAppPool -Name soft-craft-client
+        Stop-IISSite -Name soft-craft-client -Confirm:$false
+        npm install
+        npm run build
+        Copy-Item ./dist/soft-craft-client/* C:/inetpub/wwwroot/soft-craft-client -Recurse -Force
+        Start-WebAppPool -Name soft-craft-client
+        Start-IISSite -Name soft-craft-client
+        Remove-Item .\* -Force -Recurse
