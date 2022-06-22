@@ -20,5 +20,13 @@ jobs:
       with:
         node-version: 16.14.2
         cache: 'npm'
-    - run: npm install
-    - run: npm run build
+    - name: Build and Deploy
+      run: |
+        Stop-WebAppPool -Name soft-craft-client
+        Stop-IISSite -Name soft-craft-client -Confirm:$false
+        npm install
+        npm run build
+        Copy-Item ./dist/soft-craft-client/* C:/inetpub/wwwroot/soft-craft-client -Recurse -Force
+        Start-WebAppPool -Name soft-craft-client
+        Start-IISSite -Name soft-craft-client
+        Remove-Item .\* -Force -Recurse
