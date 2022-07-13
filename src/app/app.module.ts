@@ -43,26 +43,39 @@ import {ListboxModule} from "primeng/listbox";
 import {CreateEntityComponent} from './components/entity/create-entity/create-entity.component';
 import {CheckboxModule} from "primeng/checkbox";
 import {MatMenuModule} from '@angular/material/menu';
-import { EntityDetailsComponent } from './components/entity/entity-details/entity-details.component';
-import { PropertyComponent } from './components/property/property.component';
-import { CreatePropertyComponent } from './components/property/create-property/create-property.component';
+import {EntityDetailsComponent} from './components/entity/entity-details/entity-details.component';
+import {PropertyComponent} from './components/property/property.component';
+import {CreatePropertyComponent} from './components/property/create-property/create-property.component';
 import {ScrollPanelModule} from "primeng/scrollpanel";
-import { EditPropertyComponent } from './components/property/edit-property/edit-property.component';
+import {EditPropertyComponent} from './components/property/edit-property/edit-property.component';
 import {RadioButtonModule} from "primeng/radiobutton";
-import { NavigationComponent } from './components/navigation/navigation.component';
+import {NavigationComponent} from './components/navigation/navigation.component';
 import {TreeTableModule} from "primeng/treetable";
-import { CreateNavigationComponent } from './components/navigation/create-navigation/create-navigation.component';
+import {CreateNavigationComponent} from './components/navigation/create-navigation/create-navigation.component';
 import {MatIconModule} from "@angular/material/icon";
-import { UpdateNavigationComponent } from './components/navigation/update-navigation/update-navigation.component';
-import { ReOrderNavigationComponent } from './components/navigation/re-order-navigation/re-order-navigation.component';
-import { EnumerateComponent } from './components/enumerate/enumerate.component';
-import { CreateEnumerateComponent } from './components/enumerate/create-enumerate/create-enumerate.component';
-import { IconComponent } from './components/icon/icon.component';
-import { EditEnumerateComponent } from './components/enumerate/edit-enumerate/edit-enumerate.component';
-import { EnumerateValueComponent } from './components/enumerate-value/enumerate-value.component';
-import { CreateEnumerateValueComponent } from './components/enumerate-value/create-enumerate-value/create-enumerate-value.component';
-import { EditEnumerateValueComponent } from './components/enumerate-value/edit-enumerate-value/edit-enumerate-value.component';
+import {UpdateNavigationComponent} from './components/navigation/update-navigation/update-navigation.component';
+import {ReOrderNavigationComponent} from './components/navigation/re-order-navigation/re-order-navigation.component';
+import {EnumerateComponent} from './components/enumerate/enumerate.component';
+import {CreateEnumerateComponent} from './components/enumerate/create-enumerate/create-enumerate.component';
+import {IconComponent} from './components/icon/icon.component';
+import {EditEnumerateComponent} from './components/enumerate/edit-enumerate/edit-enumerate.component';
+import {EnumerateValueComponent} from './components/enumerate-value/enumerate-value.component';
+import {
+  CreateEnumerateValueComponent
+} from './components/enumerate-value/create-enumerate-value/create-enumerate-value.component';
+import {
+  EditEnumerateValueComponent
+} from './components/enumerate-value/edit-enumerate-value/edit-enumerate-value.component';
 import {SelectButtonModule} from "primeng/selectbutton";
+import {EntityCodeResultComponent} from './components/entity/entity-code-result/entity-code-result.component';
+import {EditorModule} from "primeng/editor";
+import {NumberedCodeblockModule} from '@ctrl/ngx-numbered-codeblock';
+import 'prismjs/prism';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-csharp';
+import {FieldsetModule} from "primeng/fieldset";
+import {AccordionModule} from "primeng/accordion";
+import {TabViewModule} from "primeng/tabview";
 
 @NgModule({
   declarations: [
@@ -90,46 +103,52 @@ import {SelectButtonModule} from "primeng/selectbutton";
     EditEnumerateComponent,
     EnumerateValueComponent,
     CreateEnumerateValueComponent,
-    EditEnumerateValueComponent
+    EditEnumerateValueComponent,
+    EntityCodeResultComponent,
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        ToolbarModule,
-        ButtonModule,
-        SplitButtonModule,
-        HttpClientModule,
-        OAuthModule.forRoot(),
-        AvatarModule,
-        MenuModule,
-        SidebarModule,
-        ChipModule,
-        PanelMenuModule,
-        CardModule,
-        TableModule,
-        DynamicDialogModule,
-        DialogModule,
-        InputTextModule,
-        InputNumberModule,
-        InputTextareaModule,
-        FormsModule,
-        ToastModule,
-        PanelModule,
-        RippleModule,
-        ToggleButtonModule,
-        DropdownModule,
-        InplaceModule,
-        ConfirmDialogModule,
-        ListboxModule,
-        CheckboxModule,
-        MatMenuModule,
-        ScrollPanelModule,
-        RadioButtonModule,
-        TreeTableModule,
-        MatIconModule,
-        SelectButtonModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    ToolbarModule,
+    ButtonModule,
+    SplitButtonModule,
+    HttpClientModule,
+    OAuthModule.forRoot(),
+    AvatarModule,
+    MenuModule,
+    SidebarModule,
+    ChipModule,
+    PanelMenuModule,
+    CardModule,
+    TableModule,
+    DynamicDialogModule,
+    DialogModule,
+    InputTextModule,
+    InputNumberModule,
+    InputTextareaModule,
+    FormsModule,
+    ToastModule,
+    PanelModule,
+    RippleModule,
+    ToggleButtonModule,
+    DropdownModule,
+    InplaceModule,
+    ConfirmDialogModule,
+    ListboxModule,
+    CheckboxModule,
+    MatMenuModule,
+    ScrollPanelModule,
+    RadioButtonModule,
+    TreeTableModule,
+    MatIconModule,
+    SelectButtonModule,
+    EditorModule,
+    NumberedCodeblockModule,
+    FieldsetModule,
+    AccordionModule,
+    TabViewModule
+  ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,

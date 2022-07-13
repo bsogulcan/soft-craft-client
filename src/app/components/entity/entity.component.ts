@@ -62,4 +62,8 @@ export class EntityComponent implements OnInit {
     this.router.navigate(['project', this.projectId, 'entity', entityId, 'properties']);
 
   }
+
+  codeResults(entityId: number) {
+    this.router.navigate(['project', this.projectId, 'entity', entityId, 'code-results']);
+  }
 }

@@ -12,6 +12,7 @@ import {PropertyComponent} from "./components/property/property.component";
 import {NavigationComponent} from "./components/navigation/navigation.component";
 import {EnumerateComponent} from "./components/enumerate/enumerate.component";
 import {EnumerateValueComponent} from "./components/enumerate-value/enumerate-value.component";
+import {EntityCodeResultComponent} from "./components/entity/entity-code-result/entity-code-result.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'project/:projectId/create-entity', component: CreateEntityComponent},
   {path: 'project/:projectId/entity/:entityId/details', component: EntityDetailsComponent},
   {path: 'project/:projectId/entity/:entityId/properties', component: PropertyComponent},
+  {path: 'project/:projectId/entity/:entityId/code-results', component: EntityCodeResultComponent},
   {path: 'project/:projectId/navigations', component: NavigationComponent},
   {path: 'project/:projectId/enumerates', component: EnumerateComponent},
   {path: 'project/:projectId/enumerate/:enumerateId/values', component: EnumerateValueComponent},
