@@ -1,15 +1,3 @@
-export class RepositoryResult {
-  iRepositoryResult: string;
-  repositoryResult: string;
-}
-
-export class AppServiceResult {
-  iAppServiceResult: string;
-  appServiceResult: string;
-  permissionNamesResult: string;
-  authorizationResult: string;
-}
-
 export class EntityCodeResultDto {
   entityId: number;
   entityName: string;
@@ -18,6 +6,8 @@ export class EntityCodeResultDto {
   repositoryResult: RepositoryResult;
   appServiceResult: AppServiceResult;
   configurationResult: string;
+  typeScriptDtoResult: TypeScriptDtoResultDto;
+  typeScriptServiceResult: string;
 }
 
 class DtoResultDto {
@@ -30,3 +20,25 @@ class DtoResultDto {
   dtosToDomainMapResult: string;
   domainToDtosMapResult: string;
 }
+
+export class RepositoryResult {
+  iRepositoryResult: string;
+  repositoryResult: string;
+}
+
+export class AppServiceResult {
+  iAppServiceResult: string;
+  appServiceResult: string;
+  permissionNamesResult: string;
+  authorizationResult: string;
+}
+
+export class TypeScriptDtoResultDto {
+  fullOutput: string;
+  partOutput: string;
+  createInput: string;
+  updateInput: string;
+  getInput: string;
+  deleteInput: string;
+}
+
