@@ -18,6 +18,7 @@ export class ProjectDetailsComponent implements OnInit {
   logTypes: any;
   saving: boolean;
   projectOptions: MenuItem[];
+  private blob: Blob;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -91,7 +92,14 @@ export class ProjectDetailsComponent implements OnInit {
     const generateProjectInput = new GenerateProjectInput();
     generateProjectInput.id = this.project.id;
     this.projectService.generate(generateProjectInput).subscribe(response => {
-
+      this.projectService.downloadProjectZip(this.project.id, this.project.uniqueName).subscribe((data) => {
+        this.blob = new Blob([data], {type: 'application/zip'});
+        var downloadURL = window.URL.createObjectURL(data);
+        var link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = this.project.uniqueName + ".zip";
+        link.click();
+      });
     });
   }
 }
