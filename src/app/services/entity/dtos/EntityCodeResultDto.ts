@@ -1,3 +1,9 @@
+export class TypeScriptComponentResultDto {
+  componentTsStringify: string;
+  componentHtmlStringify: string;
+  componentCssStringify: string;
+}
+
 export class EntityCodeResultDto {
   entityId: number;
   entityName: string;
@@ -8,9 +14,12 @@ export class EntityCodeResultDto {
   configurationResult: string;
   typeScriptDtoResult: TypeScriptDtoResultDto;
   typeScriptServiceResult: string;
+  typeScriptComponentResult: TypeScriptComponentResultDto;
+  typeScriptCreateComponentResult: TypeScriptComponentResultDto;
+  typeScriptEditComponentResult: TypeScriptComponentResultDto;
 }
 
-class DtoResultDto {
+export class DtoResultDto {
   fullOutput: string;
   partOutput: string;
   createInput: string;

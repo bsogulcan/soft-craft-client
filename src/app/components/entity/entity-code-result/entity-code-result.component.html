@@ -9,6 +9,7 @@
   </div>
   <div class="text-500 mb-5">These outputs are readonly for now</div>
 
+
   <p-tabView>
     <p-tabPanel header="C#">
       <p-accordion [multiple]="true">
@@ -145,11 +146,74 @@
             </p-tabPanel>
           </p-tabView>
         </p-accordionTab>
-        <p-accordionTab header="Service">
+        <p-accordionTab>
+          <ng-template pTemplate="header">
+            PrimeFlex
+            <div class="flex flex-row-reverse" style="width: 100%">
+              <button mat-icon-button>
+                <mat-icon>open_in_new</mat-icon>
+              </button>
+
+              <button mat-icon-button>
+                <mat-icon>cloud_download</mat-icon>
+              </button>
+            </div>
+          </ng-template>
+          <mat-menu #TypeScriptServiceMenu="matMenu" class="your-menu-class">
+            <menu mat-menu-item class="m-0"
+                  (click)="download(entityCodeResultDto.entityName+'Service.ts',entityCodeResultDto.typeScriptServiceResult)">
+              <mat-icon>open_in_new</mat-icon>
+              <span>Open In New Tab</span>
+            </menu>
+            <menu mat-menu-item class="m-0"
+                  (click)="download(entityCodeResultDto.entityName+'Service.ts',entityCodeResultDto.typeScriptServiceResult)">
+              <mat-icon>cloud_download</mat-icon>
+              <span>Download</span>
+            </menu>
+          </mat-menu>
           <ngx-numbered-codeblock
             languague="typescript"
             [code]="entityCodeResultDto.typeScriptServiceResult"></ngx-numbered-codeblock>
         </p-accordionTab>
+        <p-accordionTab header="List Component">
+          <p-tabView>
+            <p-tabPanel header="Ts">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptComponentResult.componentTsStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Html">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptComponentResult.componentHtmlStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Css">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptComponentResult.componentCssStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
+        <p-accordionTab header="Create Component">
+          <p-tabView>
+            <p-tabPanel header="Ts">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptCreateComponentResult.componentTsStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Html">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptCreateComponentResult.componentHtmlStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Css">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptCreateComponentResult.componentCssStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
+
       </p-accordion>
 
     </p-tabPanel>

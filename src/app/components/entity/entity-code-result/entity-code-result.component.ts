@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {EntityService} from "../../../services/entity/entity.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EntityCodeResultDto} from "../../../services/entity/dtos/EntityCodeResultDto";
 import {appModuleAnimation} from "../../../shared/animations/routerTransition";
+import {MatMenuTrigger} from "@angular/material/menu";
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-entity-code-result',
@@ -15,7 +17,8 @@ export class EntityCodeResultComponent implements OnInit {
 
   constructor(private entityService: EntityService,
               private router: Router,
-              private route: ActivatedRoute,) {
+              private route: ActivatedRoute,
+              private readonly viewRef: ViewContainerRef) {
     route.params.subscribe(param => {
       const entityId = param["entityId"];
       if (entityId) {
@@ -30,4 +33,11 @@ export class EntityCodeResultComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  download(fileName: string, codeResult: string) {
+    const blob = new Blob([codeResult], {type: 'text/plain'});
+    const anchor = document.createElement('a');
+    anchor.download = fileName;
+    anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
+    anchor.click();
+  }
 }
