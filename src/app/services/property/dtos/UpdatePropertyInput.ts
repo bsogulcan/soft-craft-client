@@ -20,4 +20,6 @@ export class UpdatePropertyInput {
   isEnumProperty: boolean;
   enumerateId: number | undefined;
   enumerate: EnumerateFullOutput;
+  displayOnList: boolean;
+  filterOnList: boolean;
 }

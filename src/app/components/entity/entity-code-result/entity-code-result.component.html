@@ -1,0 +1,223 @@
+<div class="surface-card p-4 shadow-2 border-round" [@routerTransition] *ngIf="entityCodeResultDto">
+  <div class="flex card-container blue-container overflow-hidden">
+    <div
+      class="flex-none">
+      <div class="font-medium text-3xl text-900 mb-3">
+        Generated Codes For '{{entityCodeResultDto.entityName}}'
+      </div>
+    </div>
+  </div>
+  <div class="text-500 mb-5">These outputs are readonly for now</div>
+
+
+  <p-tabView>
+    <p-tabPanel header="C#">
+      <p-accordion [multiple]="true">
+        <p-accordionTab header="Entity" [selected]="true">
+          <ngx-numbered-codeblock
+            languague="csharp" [code]="entityCodeResultDto.entityResult"></ngx-numbered-codeblock>
+        </p-accordionTab>
+        <p-accordionTab header="Configuration">
+          <ngx-numbered-codeblock
+            languague="csharp"
+            [code]="entityCodeResultDto.configurationResult"></ngx-numbered-codeblock>
+        </p-accordionTab>
+        <p-accordionTab header="Repository">
+          <p-tabView>
+            <p-tabPanel header="Interface">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.repositoryResult.iRepositoryResult"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Repository">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.repositoryResult.repositoryResult"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
+        <p-accordionTab header="Data Transfer Objects & Mapping">
+          <p-tabView>
+            <p-tabPanel header="Full Output">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.dtoResult.fullOutput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Part Output">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.dtoResult.partOutput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Create Input">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.dtoResult.createInput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Update Input">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.dtoResult.updateInput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Get Input">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.dtoResult.getInput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Delete Input">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.dtoResult.deleteInput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Domain to Dto Mapping">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.dtoResult.domainToDtosMapResult"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Dto to Domain Mapping">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.dtoResult.dtosToDomainMapResult"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
+        <p-accordionTab header="Authorization">
+          <p-tabView>
+            <p-tabPanel header="Permission Names">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.appServiceResult.permissionNamesResult"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Providers">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.appServiceResult.authorizationResult"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
+        <p-accordionTab header="AppService">
+          <p-tabView>
+            <p-tabPanel header="Interface">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.appServiceResult.iAppServiceResult"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Service">
+              <ngx-numbered-codeblock
+                languague="csharp"
+                [code]="entityCodeResultDto.appServiceResult.appServiceResult"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
+      </p-accordion>
+    </p-tabPanel>
+    <p-tabPanel header="TypeScript">
+      <p-accordion [multiple]="true">
+        <p-accordionTab header="Data Transfer Objects">
+          <p-tabView>
+            <p-tabPanel header="Full Output">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptDtoResult.fullOutput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Part Output">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptDtoResult.partOutput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Create Input">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptDtoResult.createInput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Update Input">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptDtoResult.updateInput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Get Input">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptDtoResult.getInput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Delete Input">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptDtoResult.deleteInput"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
+        <p-accordionTab>
+          <ng-template pTemplate="header">
+            PrimeFlex
+            <div class="flex flex-row-reverse" style="width: 100%">
+              <button mat-icon-button>
+                <mat-icon>open_in_new</mat-icon>
+              </button>
+
+              <button mat-icon-button>
+                <mat-icon>cloud_download</mat-icon>
+              </button>
+            </div>
+          </ng-template>
+          <mat-menu #TypeScriptServiceMenu="matMenu" class="your-menu-class">
+            <menu mat-menu-item class="m-0"
+                  (click)="download(entityCodeResultDto.entityName+'Service.ts',entityCodeResultDto.typeScriptServiceResult)">
+              <mat-icon>open_in_new</mat-icon>
+              <span>Open In New Tab</span>
+            </menu>
+            <menu mat-menu-item class="m-0"
+                  (click)="download(entityCodeResultDto.entityName+'Service.ts',entityCodeResultDto.typeScriptServiceResult)">
+              <mat-icon>cloud_download</mat-icon>
+              <span>Download</span>
+            </menu>
+          </mat-menu>
+          <ngx-numbered-codeblock
+            languague="typescript"
+            [code]="entityCodeResultDto.typeScriptServiceResult"></ngx-numbered-codeblock>
+        </p-accordionTab>
+        <p-accordionTab header="List Component">
+          <p-tabView>
+            <p-tabPanel header="Ts">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptComponentResult.componentTsStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Html">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptComponentResult.componentHtmlStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Css">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptComponentResult.componentCssStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
+        <p-accordionTab header="Create Component">
+          <p-tabView>
+            <p-tabPanel header="Ts">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptCreateComponentResult.componentTsStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Html">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptCreateComponentResult.componentHtmlStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Css">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptCreateComponentResult.componentCssStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
+
+      </p-accordion>
+
+    </p-tabPanel>
+  </p-tabView>
+
+
+</div>

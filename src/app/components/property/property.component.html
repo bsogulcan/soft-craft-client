@@ -32,8 +32,8 @@
                 <th>Max Length</th>
                 <th>Nullable</th>
                 <th>Required</th>
-                <th>Unique</th>
-                <th>Indexed</th>
+                <th>DisplayOnList</th>
+                <th>FilterOnList</th>
                 <th>Actions</th>
               </tr>
             </ng-template>
@@ -54,11 +54,11 @@
                               [disabled]="true"></p-checkbox>
                 </td>
                 <td>
-                  <p-checkbox [(ngModel)]="property.unique" [binary]="true"
+                  <p-checkbox [(ngModel)]="property.displayOnList" [binary]="true"
                               [disabled]="true"></p-checkbox>
                 </td>
                 <td>
-                  <p-checkbox [(ngModel)]="property.indexed" [binary]="true"
+                  <p-checkbox [(ngModel)]="property.filterOnList" [binary]="true"
                               [disabled]="true"></p-checkbox>
                 </td>
                 <td>

@@ -23,4 +23,6 @@ export class PropertyFullOutput {
   isEnumProperty: boolean;
   enumerateId: number | undefined;
   enumerate: EnumerateFullOutput;
+  displayOnList: boolean;
+  filterOnList: boolean;
 }

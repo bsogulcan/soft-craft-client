@@ -18,4 +18,12 @@ export class ProjectService extends CrudAppService<ProjectDto, undefined, Create
   generate(generateInput: GenerateProjectInput) {
     return this.httpClient.post(environment.apiBaseUrl + '/api/app/project/generate', generateInput);
   }
+
+  downloadProjectZip(projectId: number, projectName: string) {
+    const httpOptions = {
+      responseType: 'blob' as 'json'
+    };
+
+    return this.httpClient.get<Blob>(environment.apiBaseUrl + '/api/DownloadProject/GetProjectZipFile?projectId=' + projectId + '&projectName=' + projectName, httpOptions);
+  }
 }

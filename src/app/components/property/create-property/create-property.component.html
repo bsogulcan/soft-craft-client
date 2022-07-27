@@ -96,6 +96,17 @@
           <p-checkbox [(ngModel)]="property.unique" [binary]="true" inputId="inputUnique"></p-checkbox>
           <label for="inputUnique">Unique</label>
         </div>
+
+        <div class="col field-checkbox">
+          <p-checkbox [(ngModel)]="property.displayOnList" [binary]="true" inputId="inputDisplayOnList"></p-checkbox>
+          <label for="inputDisplayOnList">DisplayOnList</label>
+        </div>
+
+        <div class="col field-checkbox">
+          <p-checkbox [(ngModel)]="property.filterOnList" [binary]="true" inputId="inputFilterOnList"></p-checkbox>
+          <label for="inputFilterOnList">FilterOnList</label>
+        </div>
+
       </div>
     </li>
   </ul>
