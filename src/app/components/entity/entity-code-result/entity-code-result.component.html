@@ -13,95 +13,318 @@
   <p-tabView>
     <p-tabPanel header="C#">
       <p-accordion [multiple]="true">
-        <p-accordionTab header="Entity" [selected]="true">
+        <p-accordionTab #csEntity header="Entity">
+          <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                   *ngIf="csEntity.selected">
+            <mat-button-toggle value="download"
+                               (click)="download(entityCodeResultDto.entityName+'.cs',entityCodeResultDto.entityResult)">
+              Download
+            </mat-button-toggle>
+            <mat-button-toggle value="newWindow" (click)="openInNewWindow(entityCodeResultDto.entityResult)">
+              New Window
+            </mat-button-toggle>
+            <mat-button-toggle value="copy" [cdkCopyToClipboard]="entityCodeResultDto.entityResult">Copy
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+
           <ngx-numbered-codeblock
             languague="csharp" [code]="entityCodeResultDto.entityResult"></ngx-numbered-codeblock>
         </p-accordionTab>
-        <p-accordionTab header="Configuration">
+        <p-accordionTab #csConfiguration header="Configuration">
+          <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                   *ngIf="csConfiguration.selected">
+            <mat-button-toggle value="download"
+                               (click)="download(entityCodeResultDto.entityName+'Configuration.cs',entityCodeResultDto.configurationResult)">
+              Download
+            </mat-button-toggle>
+            <mat-button-toggle value="newWindow" (click)="openInNewWindow(entityCodeResultDto.configurationResult)">
+              New Window
+            </mat-button-toggle>
+            <mat-button-toggle value="copy" [cdkCopyToClipboard]="entityCodeResultDto.configurationResult">Copy
+            </mat-button-toggle>
+          </mat-button-toggle-group>
           <ngx-numbered-codeblock
             languague="csharp"
             [code]="entityCodeResultDto.configurationResult"></ngx-numbered-codeblock>
         </p-accordionTab>
-        <p-accordionTab header="Repository">
+        <p-accordionTab #csRepository header="Repository">
           <p-tabView>
-            <p-tabPanel header="Interface">
+            <p-tabPanel #csRepositoryInterface header="Interface">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csRepository.selected&&csRepositoryInterface.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('I'+entityCodeResultDto.entityName+'Repository.cs',entityCodeResultDto.repositoryResult.iRepositoryResult)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.repositoryResult.iRepositoryResult)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.repositoryResult.iRepositoryResult">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.repositoryResult.iRepositoryResult"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Repository">
+            <p-tabPanel #csRepositoryRepository header="Repository">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csRepository.selected&&csRepositoryRepository.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download(entityCodeResultDto.entityName+'Repository.cs',entityCodeResultDto.repositoryResult.repositoryResult)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.repositoryResult.repositoryResult)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.repositoryResult.repositoryResult">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.repositoryResult.repositoryResult"></ngx-numbered-codeblock>
             </p-tabPanel>
           </p-tabView>
         </p-accordionTab>
-        <p-accordionTab header="Data Transfer Objects & Mapping">
+        <p-accordionTab #csDtos header="Data Transfer Objects & Mapping">
           <p-tabView>
-            <p-tabPanel header="Full Output">
+            <p-tabPanel #csDtoFullOutput header="Full Output">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csDtos.selected&&csDtoFullOutput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download(entityCodeResultDto.entityName+'FullOutput.cs',entityCodeResultDto.dtoResult.fullOutput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.dtoResult.fullOutput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.dtoResult.fullOutput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.dtoResult.fullOutput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Part Output">
+            <p-tabPanel #csDtoPartOutput header="Part Output">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csDtos.selected&&csDtoPartOutput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download(entityCodeResultDto.entityName+'PartOutput.cs',entityCodeResultDto.dtoResult.partOutput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.dtoResult.partOutput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.dtoResult.partOutput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.dtoResult.partOutput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Create Input">
+            <p-tabPanel #csDtoCreateInput header="Create Input">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csDtos.selected&&csDtoCreateInput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('Create'+entityCodeResultDto.entityName+'Input.cs',entityCodeResultDto.dtoResult.createInput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.dtoResult.createInput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.dtoResult.createInput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.dtoResult.createInput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Update Input">
+            <p-tabPanel #csDtoUpdateInput header="Update Input">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csDtos.selected&&csDtoUpdateInput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('Update'+entityCodeResultDto.entityName+'Input.cs',entityCodeResultDto.dtoResult.updateInput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.dtoResult.updateInput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.dtoResult.updateInput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
+
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.dtoResult.updateInput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Get Input">
+            <p-tabPanel #csDtoGetInput header="Get Input">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csDtos.selected&&csDtoGetInput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('Get'+entityCodeResultDto.entityName+'Input.cs',entityCodeResultDto.dtoResult.getInput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.dtoResult.getInput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.dtoResult.getInput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.dtoResult.getInput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Delete Input">
+            <p-tabPanel #csDtoDeleteInput header="Delete Input">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csDtos.selected&&csDtoDeleteInput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('Delete'+entityCodeResultDto.entityName+'Input.cs',entityCodeResultDto.dtoResult.deleteInput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.dtoResult.deleteInput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.dtoResult.deleteInput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.dtoResult.deleteInput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Domain to Dto Mapping">
+            <p-tabPanel #csDtoDomainToDto header="Domain to Dto Mapping">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csDtos.selected&&csDtoDomainToDto.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('DomainToDto'+entityCodeResultDto.entityName+'.cs',entityCodeResultDto.dtoResult.domainToDtosMapResult)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.dtoResult.domainToDtosMapResult)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.dtoResult.domainToDtosMapResult">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.dtoResult.domainToDtosMapResult"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Dto to Domain Mapping">
+            <p-tabPanel #csDtoDtoToDomain header="Dto to Domain Mapping">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csDtos.selected&&csDtoDtoToDomain.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('DtoToDomain'+entityCodeResultDto.entityName+'.cs',entityCodeResultDto.dtoResult.dtosToDomainMapResult)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.dtoResult.dtosToDomainMapResult)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.dtoResult.dtosToDomainMapResult">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.dtoResult.dtosToDomainMapResult"></ngx-numbered-codeblock>
             </p-tabPanel>
           </p-tabView>
         </p-accordionTab>
-        <p-accordionTab header="Authorization">
+        <p-accordionTab #csAuthorization header="Authorization">
           <p-tabView>
-            <p-tabPanel header="Permission Names">
+            <p-tabPanel #csAuthorizationPermissionName header="Permission Names">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csAuthorization.selected&&csAuthorizationPermissionName.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('AuthorizationPermissionName'+entityCodeResultDto.entityName+'.cs',entityCodeResultDto.appServiceResult.permissionNamesResult)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.appServiceResult.permissionNamesResult)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.appServiceResult.permissionNamesResult">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.appServiceResult.permissionNamesResult"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Providers">
+            <p-tabPanel #csAuthorizationProviders header="Providers">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csAuthorization.selected&&csAuthorizationProviders.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('AuthorizationProviders'+entityCodeResultDto.entityName+'.cs',entityCodeResultDto.appServiceResult.authorizationResult)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.appServiceResult.authorizationResult)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.appServiceResult.authorizationResult">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.appServiceResult.authorizationResult"></ngx-numbered-codeblock>
             </p-tabPanel>
           </p-tabView>
         </p-accordionTab>
-        <p-accordionTab header="AppService">
+        <p-accordionTab #csAppService header="AppService">
           <p-tabView>
-            <p-tabPanel header="Interface">
+            <p-tabPanel #csAppServiceInterface header="Interface">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csAppService.selected&&csAppServiceInterface.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('I'+entityCodeResultDto.entityName+'AppService.cs',entityCodeResultDto.appServiceResult.iAppServiceResult)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.appServiceResult.iAppServiceResult)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.appServiceResult.iAppServiceResult">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.appServiceResult.iAppServiceResult"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Service">
+            <p-tabPanel #csAppServiceAppService header="Service">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="csAppService.selected&&csAppServiceAppService.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download(entityCodeResultDto.entityName+'AppService.cs',entityCodeResultDto.appServiceResult.appServiceResult)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.appServiceResult.appServiceResult)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.appServiceResult.appServiceResult">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="csharp"
                 [code]="entityCodeResultDto.appServiceResult.appServiceResult"></ngx-numbered-codeblock>
@@ -112,120 +335,345 @@
     </p-tabPanel>
     <p-tabPanel header="TypeScript">
       <p-accordion [multiple]="true">
-        <p-accordionTab header="Data Transfer Objects">
+        <p-accordionTab #tsDtos header="Data Transfer Objects">
           <p-tabView>
-            <p-tabPanel header="Full Output">
+            <p-tabPanel #tsDtoFullOutput header="Full Output">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsDtos.selected&&tsDtoFullOutput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download(entityCodeResultDto.entityName+'FullOutput.ts',entityCodeResultDto.typeScriptDtoResult.fullOutput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptDtoResult.fullOutput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptDtoResult.fullOutput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptDtoResult.fullOutput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Part Output">
+            <p-tabPanel #tsDtoPartOutput header="Part Output">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsDtos.selected&&tsDtoPartOutput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download(entityCodeResultDto.entityName+'PartOutput.ts',entityCodeResultDto.typeScriptDtoResult.partOutput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptDtoResult.partOutput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptDtoResult.partOutput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptDtoResult.partOutput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Create Input">
+            <p-tabPanel #tsDtoCreateInput header="Create Input">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsDtos.selected&&tsDtoCreateInput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('Create'+entityCodeResultDto.entityName+'Input.ts',entityCodeResultDto.typeScriptDtoResult.createInput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptDtoResult.createInput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptDtoResult.createInput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptDtoResult.createInput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Update Input">
+            <p-tabPanel #tsDtoUpdateInput header="Update Input">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsDtos.selected&&tsDtoUpdateInput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('Update'+entityCodeResultDto.entityName+'Input.ts',entityCodeResultDto.typeScriptDtoResult.updateInput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptDtoResult.updateInput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptDtoResult.updateInput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptDtoResult.updateInput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Get Input">
+            <p-tabPanel #tsDtoGetInput header="Get Input">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsDtos.selected&&tsDtoGetInput.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('Get'+entityCodeResultDto.entityName+'Input.ts',entityCodeResultDto.typeScriptDtoResult.getInput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptDtoResult.getInput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptDtoResult.getInput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptDtoResult.getInput"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Delete Input">
+            <p-tabPanel #tsDtoDelete header="Delete Input">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsDtos.selected&&tsDtoDelete.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('Get'+entityCodeResultDto.entityName+'Input.ts',entityCodeResultDto.typeScriptDtoResult.deleteInput)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptDtoResult.deleteInput)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptDtoResult.deleteInput">Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptDtoResult.deleteInput"></ngx-numbered-codeblock>
             </p-tabPanel>
           </p-tabView>
         </p-accordionTab>
-        <p-accordionTab>
-          <ng-template pTemplate="header">
-            PrimeFlex
-            <div class="flex flex-row-reverse" style="width: 100%">
-              <button mat-icon-button>
-                <mat-icon>open_in_new</mat-icon>
-              </button>
-
-              <button mat-icon-button>
-                <mat-icon>cloud_download</mat-icon>
-              </button>
-            </div>
-          </ng-template>
-          <mat-menu #TypeScriptServiceMenu="matMenu" class="your-menu-class">
-            <menu mat-menu-item class="m-0"
-                  (click)="download(entityCodeResultDto.entityName+'Service.ts',entityCodeResultDto.typeScriptServiceResult)">
-              <mat-icon>open_in_new</mat-icon>
-              <span>Open In New Tab</span>
-            </menu>
-            <menu mat-menu-item class="m-0"
-                  (click)="download(entityCodeResultDto.entityName+'Service.ts',entityCodeResultDto.typeScriptServiceResult)">
-              <mat-icon>cloud_download</mat-icon>
-              <span>Download</span>
-            </menu>
-          </mat-menu>
+        <p-accordionTab #tsService header="Service">
+          <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                   *ngIf="tsService.selected">
+            <mat-button-toggle value="download"
+                               (click)="download(entityCodeResultDto.entityName+'Service.ts',entityCodeResultDto.typeScriptServiceResult)">
+              Download
+            </mat-button-toggle>
+            <mat-button-toggle value="newWindow" (click)="openInNewWindow(entityCodeResultDto.typeScriptServiceResult)">
+              New Window
+            </mat-button-toggle>
+            <mat-button-toggle value="copy" [cdkCopyToClipboard]="entityCodeResultDto.typeScriptServiceResult">Copy
+            </mat-button-toggle>
+          </mat-button-toggle-group>
           <ngx-numbered-codeblock
             languague="typescript"
             [code]="entityCodeResultDto.typeScriptServiceResult"></ngx-numbered-codeblock>
+
+
+          <!--          <mat-menu #TypeScriptServiceMenu="matMenu" class="your-menu-class">-->
+          <!--            <menu mat-menu-item class="m-0"-->
+          <!--                  (click)="download(entityCodeResultDto.entityName+'Service.ts',entityCodeResultDto.typeScriptServiceResult)">-->
+          <!--              <mat-icon>open_in_new</mat-icon>-->
+          <!--              <span>Open In New Tab</span>-->
+          <!--            </menu>-->
+          <!--            <menu mat-menu-item class="m-0"-->
+          <!--                  (click)="download(entityCodeResultDto.entityName+'Service.ts',entityCodeResultDto.typeScriptServiceResult)">-->
+          <!--              <mat-icon>cloud_download</mat-icon>-->
+          <!--              <span>Download</span>-->
+          <!--            </menu>-->
+          <!--          </mat-menu>-->
+
+
         </p-accordionTab>
-        <p-accordionTab header="List Component">
+        <p-accordionTab #tsListComponent header="List Component">
           <p-tabView>
-            <p-tabPanel header="Ts">
+            <p-tabPanel #tsListComponentTs header="Ts">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsListComponent.selected&&tsListComponentTs.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download(entityCodeResultDto.entityName+'-component.ts',entityCodeResultDto.typeScriptComponentResult.componentTsStringify)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptComponentResult.componentTsStringify)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptComponentResult.componentTsStringify">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptComponentResult.componentTsStringify"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Html">
+            <p-tabPanel #tsListComponentHtml header="Html">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsListComponent.selected&&tsListComponentHtml.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download(entityCodeResultDto.entityName+'-component.html',entityCodeResultDto.typeScriptComponentResult.componentHtmlStringify)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptComponentResult.componentHtmlStringify)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptComponentResult.componentHtmlStringify">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptComponentResult.componentHtmlStringify"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Css">
+            <p-tabPanel #tsListComponentCss header="Css">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsListComponent.selected&&tsListComponentCss.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download(entityCodeResultDto.entityName+'-component.css',entityCodeResultDto.typeScriptComponentResult.componentCssStringify)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptComponentResult.componentCssStringify)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptComponentResult.componentCssStringify">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptComponentResult.componentCssStringify"></ngx-numbered-codeblock>
             </p-tabPanel>
           </p-tabView>
         </p-accordionTab>
-        <p-accordionTab header="Create Component">
+        <p-accordionTab #tsCreateComponent header="Create Component">
           <p-tabView>
-            <p-tabPanel header="Ts">
+            <p-tabPanel #tsCreateComponentTs header="Ts">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsCreateComponent.selected&&tsCreateComponentTs.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('create-'+entityCodeResultDto.entityName+'-component.ts',entityCodeResultDto.typeScriptCreateComponentResult.componentTsStringify)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptCreateComponentResult.componentTsStringify)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptCreateComponentResult.componentTsStringify">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptCreateComponentResult.componentTsStringify"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Html">
+            <p-tabPanel #tsCreateComponentHtml header="Html">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsCreateComponent.selected&&tsCreateComponentHtml.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('create-'+entityCodeResultDto.entityName+'-component.html',entityCodeResultDto.typeScriptCreateComponentResult.componentHtmlStringify)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptCreateComponentResult.componentHtmlStringify)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptCreateComponentResult.componentHtmlStringify">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptCreateComponentResult.componentHtmlStringify"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Css">
+            <p-tabPanel #tsCreateComponentCss header="Css">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsCreateComponent.selected&&tsCreateComponentCss.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('create-'+entityCodeResultDto.entityName+'-component.css',entityCodeResultDto.typeScriptCreateComponentResult.componentCssStringify)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptCreateComponentResult.componentCssStringify)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptCreateComponentResult.componentCssStringify">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptCreateComponentResult.componentCssStringify"></ngx-numbered-codeblock>
             </p-tabPanel>
           </p-tabView>
         </p-accordionTab>
-        <p-accordionTab header="Edit Component">
+        <p-accordionTab #tsEditComponent header="Edit Component">
           <p-tabView>
-            <p-tabPanel header="Ts">
+            <p-tabPanel #tsEditComponentTs header="Ts">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsEditComponent.selected&&tsEditComponentTs.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('edit-'+entityCodeResultDto.entityName+'-component.ts',entityCodeResultDto.typeScriptEditComponentResult.componentTsStringify)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptEditComponentResult.componentTsStringify)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptEditComponentResult.componentTsStringify">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptEditComponentResult.componentTsStringify"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Html">
+            <p-tabPanel #tsEditComponentHtml header="Html">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsEditComponent.selected&&tsEditComponentHtml.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('edit-'+entityCodeResultDto.entityName+'-component.html',entityCodeResultDto.typeScriptEditComponentResult.componentHtmlStringify)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptEditComponentResult.componentHtmlStringify)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptEditComponentResult.componentHtmlStringify">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
+
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptEditComponentResult.componentHtmlStringify"></ngx-numbered-codeblock>
             </p-tabPanel>
-            <p-tabPanel header="Css">
+            <p-tabPanel #tsEditComponentCss header="Css">
+              <mat-button-toggle-group name="actions" style="position: absolute;right: 80px;z-index: 1"
+                                       *ngIf="tsEditComponent.selected&&tsEditComponentCss.selected">
+                <mat-button-toggle value="download"
+                                   (click)="download('edit-'+entityCodeResultDto.entityName+'-component.css',entityCodeResultDto.typeScriptEditComponentResult.componentCssStringify)">
+                  Download
+                </mat-button-toggle>
+                <mat-button-toggle value="newWindow"
+                                   (click)="openInNewWindow(entityCodeResultDto.typeScriptEditComponentResult.componentCssStringify)">
+                  New Window
+                </mat-button-toggle>
+                <mat-button-toggle value="copy"
+                                   [cdkCopyToClipboard]="entityCodeResultDto.typeScriptEditComponentResult.componentCssStringify">
+                  Copy
+                </mat-button-toggle>
+              </mat-button-toggle-group>
+
               <ngx-numbered-codeblock
                 languague="typescript"
                 [code]="entityCodeResultDto.typeScriptEditComponentResult.componentCssStringify"></ngx-numbered-codeblock>
@@ -237,6 +685,4 @@
 
     </p-tabPanel>
   </p-tabView>
-
-
 </div>

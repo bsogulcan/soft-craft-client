@@ -40,4 +40,10 @@ export class EntityCodeResultComponent implements OnInit {
     anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
     anchor.click();
   }
+
+  openInNewWindow(codeResult: string) {
+    const blob = new Blob([codeResult], {type: 'text/plain'});
+    var fileURL = URL.createObjectURL(blob);
+    window.open(fileURL);
+  }
 }
