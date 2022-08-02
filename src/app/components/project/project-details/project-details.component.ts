@@ -115,6 +115,12 @@ export class ProjectDetailsComponent implements OnInit {
         generateModal.close();
         this.messageService.add({severity: 'success', summary: 'Downloaded!', detail: this.project.name + ' Project'});
       });
+    }, error => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Cannot Generated!',
+        detail: this.project.name + ' Project'
+      });
     });
   }
 }
