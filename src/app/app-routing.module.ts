@@ -15,26 +15,32 @@ import {EnumerateValueComponent} from "./components/enumerate-value/enumerate-va
 import {EntityCodeResultComponent} from "./components/entity/entity-code-result/entity-code-result.component";
 import {AppComponent} from "./app.component";
 
-const routes: Routes = [
-  {path: '', component: AppComponent},
-  //redirectTo: '/home', pathMatch: 'full'
-  {path: 'home', component: HomeComponent},
-  {path: 'main', component: MainComponent},
-  {path: 'projects', component: ProjectComponent},
-  {path: 'new-project', component: CreateProjectComponent},
-  {path: 'project/:projectId/entities', component: EntityComponent},
-  {path: 'project/:projectId/details', component: ProjectDetailsComponent},
-  {path: 'project/:projectId/create-entity', component: CreateEntityComponent},
-  {path: 'project/:projectId/entity/:entityId/details', component: EntityDetailsComponent},
-  {path: 'project/:projectId/entity/:entityId/properties', component: PropertyComponent},
-  {path: 'project/:projectId/entity/:entityId/code-results', component: EntityCodeResultComponent},
-  {path: 'project/:projectId/navigations', component: NavigationComponent},
-  {path: 'project/:projectId/enumerates', component: EnumerateComponent},
-  {path: 'project/:projectId/enumerate/:enumerateId/values', component: EnumerateValueComponent},
-];
-
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild([
+      {
+        path: '',
+        component: AppComponent,
+        children: [
+          //redirectTo: '/home', pathMatch: 'full'
+          {path: 'home', component: HomeComponent},
+          {path: 'main', component: MainComponent},
+          {path: 'projects', component: ProjectComponent},
+          {path: 'new-project', component: CreateProjectComponent},
+          {path: 'project/:projectId/entities', component: EntityComponent},
+          {path: 'project/:projectId/details', component: ProjectDetailsComponent},
+          {path: 'project/:projectId/create-entity', component: CreateEntityComponent},
+          {path: 'project/:projectId/entity/:entityId/details', component: EntityDetailsComponent},
+          {path: 'project/:projectId/entity/:entityId/properties', component: PropertyComponent},
+          {path: 'project/:projectId/entity/:entityId/code-results', component: EntityCodeResultComponent},
+          {path: 'project/:projectId/navigations', component: NavigationComponent},
+          {path: 'project/:projectId/enumerates', component: EnumerateComponent},
+          {path: 'project/:projectId/enumerate/:enumerateId/values', component: EnumerateValueComponent},
+        ]
+      }
+
+    ])
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

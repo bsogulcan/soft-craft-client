@@ -7,6 +7,9 @@
 
   </div>
   <div class="p-toolbar-group-right">
+    <button pButton pRipple type="button" label="Documents" routerLink="/about/documents"
+            class="p-button-outlined p-button-rounded mr-2"></button>
+
     <p-button *ngIf="!user" icon="pi pi-user" class="mr-2" label="Login" (click)="login()"></p-button>
 
     <p-avatar *ngIf="user" [label]="userLabel" styleClass="mr-2" size="large"

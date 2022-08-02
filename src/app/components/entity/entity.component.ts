@@ -43,7 +43,7 @@ export class EntityComponent implements OnInit {
   }
 
   newEntity() {
-    this.router.navigate(['project', this.projectId, 'create-entity']);
+    this.router.navigate(['app', 'project', this.projectId, 'create-entity']);
   }
 
   getTenantTypeName(tenantType: TenantType) {
@@ -55,15 +55,15 @@ export class EntityComponent implements OnInit {
   }
 
   entityDetails(entityId: number) {
-    this.router.navigate(['project', this.projectId, 'entity', entityId, 'details']);
+    this.router.navigate(['app','project', this.projectId, 'entity', entityId, 'details']);
   }
 
   entityProperties(entityId: number) {
-    this.router.navigate(['project', this.projectId, 'entity', entityId, 'properties']);
+    this.router.navigate(['app','project', this.projectId, 'entity', entityId, 'properties']);
 
   }
 
   codeResults(entityId: number) {
-    this.router.navigate(['project', this.projectId, 'entity', entityId, 'code-results']);
+    this.router.navigate(['app','project', this.projectId, 'entity', entityId, 'code-results']);
   }
 }

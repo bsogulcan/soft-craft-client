@@ -82,7 +82,7 @@ export class EnumerateComponent implements OnInit {
   }
 
   enumerateValues(id: number) {
-    this.router.navigate(['project', this.projectId, 'enumerate', id, 'values']);
+    this.router.navigate(['app','project', this.projectId, 'enumerate', id, 'values']);
   }
 
   deleteEnumerate(id: number) {

@@ -78,7 +78,7 @@ export class ProjectDetailsComponent implements OnInit {
       accept: () => {
         this.projectService.delete(this.project.id).subscribe(response => {
           this.toggleSideBarService.sideBarToggle.emit(true);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/app/home');
         })
       },
       key: "positionDialog"

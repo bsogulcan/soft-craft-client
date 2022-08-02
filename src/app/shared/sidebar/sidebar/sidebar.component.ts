@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
     let menuItems: MenuItem[] = [{
       label: 'Create a Project',
       icon: 'pi pi-plus',
-      routerLink: '/new-project'
+      routerLink: '/app/new-project'
     }];
 
 

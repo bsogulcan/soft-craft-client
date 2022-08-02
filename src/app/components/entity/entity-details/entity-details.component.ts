@@ -80,7 +80,7 @@ export class EntityDetailsComponent implements OnInit {
 
     this.entityService.update(updateEntityInput.id, updateEntityInput).subscribe(response => {
       if (response) {
-        this.router.navigate(['project', this.entity.projectId, 'entities']);
+        this.router.navigate(['app','project', this.entity.projectId, 'entities']);
       }
     });
 
@@ -93,7 +93,7 @@ export class EntityDetailsComponent implements OnInit {
       icon: 'pi pi-info-circle',
       accept: () => {
         this.entityService.delete(this.entity.id).subscribe(response => {
-          this.router.navigate(['project', this.entity.projectId, 'entities']);
+          this.router.navigate(['app','project', this.entity.projectId, 'entities']);
         })
       },
       key: "positionDialog"

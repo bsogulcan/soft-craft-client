@@ -37,7 +37,7 @@ export class CreateProjectComponent implements OnInit {
       if (response) {
         this.saving = false;
         this.toggleSideBarService.sideBarToggle.emit(true);
-        this.router.navigate(['project', response.id, 'entities']);
+        this.router.navigate(['app','project', response.id, 'entities']);
       }
     }, () => this.saving = false);
   }
