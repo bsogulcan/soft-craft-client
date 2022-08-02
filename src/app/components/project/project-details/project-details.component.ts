@@ -6,12 +6,17 @@ import {ProjectDto} from "../../../services/projects/dtos/ProjectDto";
 import {ConfirmationService, MenuItem} from "primeng/api";
 import {ToggleSideBarService} from "../../../shared/sidebar/toggle-side-bar.service";
 import {GenerateProjectInput} from "../../../services/projects/dtos/GenerateProjectInput";
+import {DialogService} from "primeng/dynamicdialog";
+import {CreateProjectComponent} from "../create-project/create-project.component";
+import {ProjectGenerateComponent} from "../project-generate/project-generate.component";
+import {Message, MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
   styleUrls: ['./project-details.component.css'],
-  animations: [appModuleAnimation()]
+  animations: [appModuleAnimation()],
+  providers: [MessageService]
 })
 export class ProjectDetailsComponent implements OnInit {
   project: ProjectDto;
@@ -19,12 +24,16 @@ export class ProjectDetailsComponent implements OnInit {
   saving: boolean;
   projectOptions: MenuItem[];
   private blob: Blob;
+  position: string;
+  displayPosition: boolean;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private projectService: ProjectService,
               private toggleSideBarService: ToggleSideBarService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              public dialogService: DialogService,
+              private messageService: MessageService) {
     this.logTypes = [
       {name: 'Log4Net', id: 0},
       {name: 'ElasticSearch', id: 1},
@@ -89,6 +98,10 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   private generateProject() {
+    let generateModal = this.dialogService.open(ProjectGenerateComponent, {
+      closable: false,
+    });
+
     const generateProjectInput = new GenerateProjectInput();
     generateProjectInput.id = this.project.id;
     this.projectService.generate(generateProjectInput).subscribe(response => {
@@ -99,6 +112,15 @@ export class ProjectDetailsComponent implements OnInit {
         link.href = downloadURL;
         link.download = this.project.uniqueName + ".zip";
         link.click();
+        generateModal.close();
+        this.messageService.add({severity: 'success', summary: 'Downloaded!', detail: this.project.name + ' Project'});
+      });
+    }, error => {
+      generateModal.close();
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Cannot Generated!',
+        detail: this.project.name + ' Project'
       });
     });
   }
