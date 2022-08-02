@@ -80,6 +80,8 @@ import {MatButtonModule} from "@angular/material/button";
 import { ProjectGenerateComponent } from './components/project/project-generate/project-generate.component';
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {MessagesModule} from "primeng/messages";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {ClipboardModule} from "@angular/cdk/clipboard";
 
 @NgModule({
   declarations: [
@@ -155,7 +157,9 @@ import {MessagesModule} from "primeng/messages";
     TabViewModule,
     MatButtonModule,
     ProgressSpinnerModule,
-    MessagesModule
+    MessagesModule,
+    MatButtonToggleModule,
+    ClipboardModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
