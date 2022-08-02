@@ -213,6 +213,25 @@
             </p-tabPanel>
           </p-tabView>
         </p-accordionTab>
+        <p-accordionTab header="Edit Component">
+          <p-tabView>
+            <p-tabPanel header="Ts">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptEditComponentResult.componentTsStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Html">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptEditComponentResult.componentHtmlStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+            <p-tabPanel header="Css">
+              <ngx-numbered-codeblock
+                languague="typescript"
+                [code]="entityCodeResultDto.typeScriptEditComponentResult.componentCssStringify"></ngx-numbered-codeblock>
+            </p-tabPanel>
+          </p-tabView>
+        </p-accordionTab>
 
       </p-accordion>
 
