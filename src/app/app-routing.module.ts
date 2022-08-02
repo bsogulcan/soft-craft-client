@@ -13,9 +13,10 @@ import {NavigationComponent} from "./components/navigation/navigation.component"
 import {EnumerateComponent} from "./components/enumerate/enumerate.component";
 import {EnumerateValueComponent} from "./components/enumerate-value/enumerate-value.component";
 import {EntityCodeResultComponent} from "./components/entity/entity-code-result/entity-code-result.component";
+import {AppComponent} from "./app.component";
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: AppComponent},
   //redirectTo: '/home', pathMatch: 'full'
   {path: 'home', component: HomeComponent},
   {path: 'main', component: MainComponent},
@@ -33,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

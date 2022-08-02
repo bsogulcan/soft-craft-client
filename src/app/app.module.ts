@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -77,11 +76,12 @@ import {FieldsetModule} from "primeng/fieldset";
 import {AccordionModule} from "primeng/accordion";
 import {TabViewModule} from "primeng/tabview";
 import {MatButtonModule} from "@angular/material/button";
-import { ProjectGenerateComponent } from './components/project/project-generate/project-generate.component';
+import {ProjectGenerateComponent} from './components/project/project-generate/project-generate.component';
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {MessagesModule} from "primeng/messages";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {ClipboardModule} from "@angular/cdk/clipboard";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -114,8 +114,7 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
     ProjectGenerateComponent,
   ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
     AppRoutingModule,
     ToolbarModule,
     ButtonModule,

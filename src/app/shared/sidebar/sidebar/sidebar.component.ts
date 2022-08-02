@@ -36,22 +36,22 @@ export class SidebarComponent implements OnInit {
               {
                 label: 'Actions',
                 icon: 'pi pi-book',
-                routerLink: '/project/' + project.id + '/details'
+                routerLink: '/app/project/' + project.id + '/details'
               },
               {
                 label: 'Entities',
                 icon: 'pi pi-database',
-                routerLink: '/project/' + project.id + '/entities'
+                routerLink: '/app/project/' + project.id + '/entities'
               },
               {
                 label: 'Navigations',
                 icon: 'pi pi-fw pi-external-link',
-                routerLink: '/project/' + project.id + '/navigations'
+                routerLink: '/app/project/' + project.id + '/navigations'
               },
               {
                 label: 'Enumerates',
                 icon: 'pi pi-pencil',
-                routerLink: '/project/' + project.id + '/enumerates'
+                routerLink: '/app/project/' + project.id + '/enumerates'
               }
             ]
           })
