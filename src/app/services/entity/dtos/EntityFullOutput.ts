@@ -11,4 +11,5 @@ export class EntityFullOutput {
   tenantType: TenantType;
   projectId: number;
   project: ProjectDto;
+  isDefaultAbpEntity: boolean;
 }

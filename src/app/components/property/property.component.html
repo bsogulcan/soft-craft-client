@@ -9,10 +9,12 @@
     <div
       class="flex-grow-1">
     </div>
-    <div
+    <div 
       class="flex-none flex ">
-      <p-button label="New Property" (click)="openNewPropertyDialog()" icon="pi pi-plus"
-                styleClass="p-button m-2"></p-button>
+      <button mat-menu-item class="p-button m-2" [disabled]="entity.isDefaultAbpEntity" (click)="openNewPropertyDialog()">
+        <mat-icon>add</mat-icon>
+        <span>New Property</span>
+      </button>
     </div>
   </div>
   <div class="text-500 mb-5">You can modify properties of current entity</div>
@@ -67,14 +69,14 @@
                     <mat-icon>dehaze</mat-icon>
                   </button>
                   <mat-menu #entityActionsMenu>
-                    <menu mat-menu-item class="m-0" (click)="updateProperty(property.id)">
+                    <button mat-menu-item [disabled]="property.entity.isDefaultAbpEntity" (click)="updateProperty(entity.id)">
                       <mat-icon>edit</mat-icon>
                       <span>Update</span>
-                    </menu>
-                    <menu mat-menu-item class="m-0" (click)="deleteProperty(property.id)">
+                    </button>
+                    <button mat-menu-item [disabled]="property.entity.isDefaultAbpEntity" (click)="deleteProperty(entity.id)">
                       <mat-icon>delete</mat-icon>
                       <span>Delete</span>
-                    </menu>
+                    </button>
                   </mat-menu>
                 </td>
 
