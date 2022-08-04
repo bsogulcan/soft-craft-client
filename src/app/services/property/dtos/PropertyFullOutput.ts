@@ -6,6 +6,7 @@ import {EnumerateFullOutput} from "../../enumerate/dtos/EnumerateFullOutput";
 export class PropertyFullOutput {
   id: number;
   name: string;
+  relationalPropertyName: string;
   displayName: string;
   isNullable: boolean;
   type: PropertyType | undefined;

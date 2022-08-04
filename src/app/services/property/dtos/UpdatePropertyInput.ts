@@ -5,6 +5,7 @@ import {EnumerateFullOutput} from "../../enumerate/dtos/EnumerateFullOutput";
 export class UpdatePropertyInput {
   id: number;
   name: string;
+  relationalPropertyName: string;
   isNullable: boolean;
   displayName: string;
   type: PropertyType | undefined;
