@@ -113,4 +113,24 @@ export class PropertyComponent implements OnInit {
       }
     });
   }
+  getReleationTypeName(id : any) {
+    switch (id)
+    {
+      case 0 :
+        return "One To One";
+        break;
+      case 1 :
+        return "One To Many";
+        break;
+      case 2 :
+        return "Many To Many";
+        break;
+      case 3 :
+        return "One To Zero";
+        break;
+      default:
+        return "-";
+        break;
+    }
+  }
 }

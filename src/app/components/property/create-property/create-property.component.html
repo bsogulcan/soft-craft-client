@@ -11,114 +11,134 @@
                         optionValue="value"></p-selectButton>
       </div>
     </li>
-    <li class="flex align-items-center py-3 px-2  surface-border flex-wrap">
-      <div class="text-500 w-6 md:w-2 font-medium">Type</div>
-      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
-        <p-dropdown id="inputPropertyType" [options]="propertyTypes" *ngIf="selectedPropertyState==0"
-                    [(ngModel)]="selectedPropertyType"
-                    placeholder="Select Type"
-                    (onChange)="onPropertyTypeChanged($event)"
-                    [showClear]="true"></p-dropdown>
-
-        <p-dropdown [options]="this.entities" *ngIf="selectedPropertyState==1"
-                    [(ngModel)]="property.relationalEntityId"
-                    optionValue="id"
-                    optionLabel="name"
-                    placeholder="Select Entity"
-                    [showClear]="true"></p-dropdown>
-
-        <p-dropdown [options]="this.enumerates" *ngIf="selectedPropertyState==2"
-                    [(ngModel)]="property.enumerateId"
-                    optionValue="id"
-                    optionLabel="name"
-                    placeholder="Select Enumerate"
-                    [showClear]="true"></p-dropdown>
-      </div>
-    </li>
-    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap"
-        *ngIf="selectedPropertyState==1">
-      <div class="text-500 w-6 md:w-2 font-medium">Relation Type</div>
-      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
-        <p-dropdown id="inputRelationType" [options]="relationTypes"
-                    [(ngModel)]="selectedRelationType"
-                    placeholder="Select Relation Type"
-                    (onChange)="onSelectedRelationTypeChange($event)"
-                    [showClear]="true"></p-dropdown>
-      </div>
-    </li>
-    <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap" *ngIf="selectedPropertyState==1 && (property.relationType == 0 || property.relationType == 1)">
-      <div class="text-500 w-6 md:w-2 font-medium">Relational Property Name</div>
-      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
-        <input type="text" id="inputName" pInputText [(ngModel)]="property.relationalPropertyName">
-      </div>
-    </li>
-    <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap" *ngIf="selectedPropertyState==1 && (property.relationType == 2)">
-      <div class="text-500 w-6 md:w-2 font-medium">Intermediate Table Name</div>
-      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
-        <input type="text" id="inputName" pInputText [(ngModel)]="property.relationalPropertyName">
-      </div>
-    </li>
-    <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
-      <div class="text-500 w-6 md:w-2 font-medium">Name</div>
-      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
-        <input type="text" id="inputName" pInputText [(ngModel)]="property.name">
-      </div>
-    </li>
-    <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
-      <div class="text-500 w-6 md:w-2 font-medium">Display Name</div>
-      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
-        <input type="text" id="inputDisplayName" pInputText [(ngModel)]="property.displayName">
-      </div>
-    </li>
-    <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
-      <div class="text-500 w-6 md:w-2 font-medium">ToolTip</div>
-      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
-        <input type="text" id="inputToolTip" pInputText [(ngModel)]="property.toolTip">
-      </div>
-    </li>
-    <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap"
-        *ngIf="property.type==0">
-      <div class="text-500 w-6 md:w-2 font-medium">Max Length</div>
-      <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
-        <p-inputNumber inputId="inputMaxLength" [(ngModel)]="property.maxLength"></p-inputNumber>
-      </div>
-    </li>
-    <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
-      <div class="text-500 w-6 md:w-2 font-medium">Options</div>
-      <div class="grid mt-3">
-        <div class="col field-checkbox">
-          <p-radioButton name="nullableOrRequired" value="nullable" [(ngModel)]="isNullableOrRequired"
-                         inputId="inputNullable"></p-radioButton>
-          <label for="inputNullable">Nullable</label>
+    <li>
+      <p-tabView>
+        <p-tabPanel header="Current Entity" leftIcon="pi-bell-">
+          <li class="flex align-items-center py-3 px-2  surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Type</div>
+            <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+              <p-dropdown id="inputPropertyType" [options]="propertyTypes" *ngIf="selectedPropertyState==0"
+                          [(ngModel)]="selectedPropertyType"
+                          placeholder="Select Type"
+                          (onChange)="onPropertyTypeChanged($event)"
+                          [showClear]="true"></p-dropdown>
+      
+              <p-dropdown [options]="this.entities" *ngIf="selectedPropertyState==1"
+                          [(ngModel)]="property.relationalEntityId"
+                          optionValue="id"
+                          optionLabel="name"
+                          placeholder="Select Entity"
+                          [showClear]="true"></p-dropdown>
+      
+              <p-dropdown [options]="this.enumerates" *ngIf="selectedPropertyState==2"
+                          [(ngModel)]="property.enumerateId"
+                          optionValue="id"
+                          optionLabel="name"
+                          placeholder="Select Enumerate"
+                          [showClear]="true"></p-dropdown>
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap"
+              *ngIf="selectedPropertyState==1">
+            <div class="text-500 w-6 md:w-2 font-medium">Relation Type</div>
+            <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+              <p-dropdown id="inputRelationType" [options]="relationTypes"
+                          [(ngModel)]="selectedRelationType"
+                          placeholder="Select Relation Type"
+                          (onChange)="onSelectedRelationTypeChange($event)"
+                          [showClear]="true"></p-dropdown>
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Name</div>
+            <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+              <input type="text" id="inputName" pInputText [(ngModel)]="property.name">
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Display Name</div>
+            <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+              <input type="text" id="inputDisplayName" pInputText [(ngModel)]="property.displayName">
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">ToolTip</div>
+            <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+              <input type="text" id="inputToolTip" pInputText [(ngModel)]="property.toolTip">
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap"
+          *ngIf="property.type==0">
+        <div class="text-500 w-6 md:w-2 font-medium">Max Length</div>
+        <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+          <p-inputNumber inputId="inputMaxLength" [(ngModel)]="property.maxLength"></p-inputNumber>
         </div>
-
-        <div class="col field-checkbox">
-          <p-radioButton name="nullableOrRequired" value="required" [(ngModel)]="isNullableOrRequired"
-                         inputId="inputRequired"></p-radioButton>
-          <label for="inputRequired">Required</label>
+      </li>
+      <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
+        <div class="text-500 w-6 md:w-2 font-medium">Options</div>
+        <div class="grid mt-3">
+          <div class="col field-checkbox">
+            <p-radioButton name="nullableOrRequired" value="nullable" [(ngModel)]="isNullableOrRequired"
+                           inputId="inputNullable"></p-radioButton>
+            <label for="inputNullable">Nullable</label>
+          </div>
+  
+          <div class="col field-checkbox">
+            <p-radioButton name="nullableOrRequired" value="required" [(ngModel)]="isNullableOrRequired"
+                           inputId="inputRequired"></p-radioButton>
+            <label for="inputRequired">Required</label>
+          </div>
+  
+          <div class="col field-checkbox">
+            <p-checkbox [(ngModel)]="property.indexed" [binary]="true" inputId="inputIndexed"></p-checkbox>
+            <label for="inputIndexed">Indexed</label>
+          </div>
+  
+          <div class="col field-checkbox">
+            <p-checkbox [(ngModel)]="property.unique" [binary]="true" inputId="inputUnique"></p-checkbox>
+            <label for="inputUnique">Unique</label>
+          </div>
+  
+          <div class="col field-checkbox">
+            <p-checkbox [(ngModel)]="property.displayOnList" [binary]="true" inputId="inputDisplayOnList"></p-checkbox>
+            <label for="inputDisplayOnList">DisplayOnList</label>
+          </div>
+  
+          <div class="col field-checkbox">
+            <p-checkbox [(ngModel)]="property.filterOnList" [binary]="true" inputId="inputFilterOnList"></p-checkbox>
+            <label for="inputFilterOnList">FilterOnList</label>
+          </div>
+  
         </div>
-
-        <div class="col field-checkbox">
-          <p-checkbox [(ngModel)]="property.indexed" [binary]="true" inputId="inputIndexed"></p-checkbox>
-          <label for="inputIndexed">Indexed</label>
-        </div>
-
-        <div class="col field-checkbox">
-          <p-checkbox [(ngModel)]="property.unique" [binary]="true" inputId="inputUnique"></p-checkbox>
-          <label for="inputUnique">Unique</label>
-        </div>
-
-        <div class="col field-checkbox">
-          <p-checkbox [(ngModel)]="property.displayOnList" [binary]="true" inputId="inputDisplayOnList"></p-checkbox>
-          <label for="inputDisplayOnList">DisplayOnList</label>
-        </div>
-
-        <div class="col field-checkbox">
-          <p-checkbox [(ngModel)]="property.filterOnList" [binary]="true" inputId="inputFilterOnList"></p-checkbox>
-          <label for="inputFilterOnList">FilterOnList</label>
-        </div>
-
-      </div>
+      </li>
+        </p-tabPanel>
+        <p-tabPanel header="Releational Entity" *ngIf="selectedPropertyState==1 && (property.relationType != 3 && property.relationType != undefined)">
+          <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap" *ngIf="selectedPropertyState==1 && (property.relationType == 2)">
+            <div class="text-500 w-6 md:w-2 font-medium">Intermediate Table Name</div>
+            <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+              <input type="text" id="inputIntermediateTableName" pInputText [(ngModel)]="property.intermediateTableName">
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Relational Property Name</div>
+            <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+              <input type="text" id="inputRelationalName" pInputText [(ngModel)]="property.relationalName">
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Relational Property Display Name</div>
+            <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+              <input type="text" id="inputRelationalDisplayName" pInputText [(ngModel)]="property.relationalDisplayName">
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2  border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Relational Property ToolTip</div>
+            <div class="text-900 w-full md:w-10 md:flex-order-0 flex-order-1">
+              <input type="text" id="inputRelationalToolTip" pInputText [(ngModel)]="property.relationalToolTip">
+            </div>
+          </li>
+        </p-tabPanel>
+    </p-tabView>
     </li>
   </ul>
   <div class="col-12">

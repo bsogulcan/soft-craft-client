@@ -5,7 +5,6 @@ import {EnumerateFullOutput} from "../../enumerate/dtos/EnumerateFullOutput";
 
 export class CreatePropertyInput {
   name: string;
-  relationalPropertyName: string;
   isNullable: boolean;
   displayName: string;
   type: PropertyType | undefined;
@@ -23,4 +22,9 @@ export class CreatePropertyInput {
   enumerate: EnumerateFullOutput;
   displayOnList: boolean;
   filterOnList: boolean;
+
+  relationalToolTip: string;
+  relationalName: string;
+  relationalDisplayName: string;
+  intermediateTableName:string;
 }

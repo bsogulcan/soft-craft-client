@@ -30,6 +30,7 @@
                 <th>Name</th>
                 <th>Display Name</th>
                 <th>Relational Entity Name</th>
+                <th>Relation Type</th>
                 <th>ToolTip</th>
                 <th>Max Length</th>
                 <th>Nullable</th>
@@ -45,6 +46,7 @@
                 <td>{{property.name}}</td>
                 <td>{{property.displayName}}</td>
                 <td>{{property.relationalEntity?.name}}</td>
+                <td>{{getReleationTypeName(property.relationType)}}</td>
 
                 <td>{{property.toolTip}}</td>
                 <td>{{property.maxLength}}</td>
@@ -69,11 +71,11 @@
                     <mat-icon>dehaze</mat-icon>
                   </button>
                   <mat-menu #entityActionsMenu>
-                    <button mat-menu-item [disabled]="property.entity.isDefaultAbpEntity" (click)="updateProperty(entity.id)">
+                    <button mat-menu-item [disabled]="property.entity.isDefaultAbpEntity" (click)="updateProperty(property.id)">
                       <mat-icon>edit</mat-icon>
                       <span>Update</span>
                     </button>
-                    <button mat-menu-item [disabled]="property.entity.isDefaultAbpEntity" (click)="deleteProperty(entity.id)">
+                    <button mat-menu-item [disabled]="property.entity.isDefaultAbpEntity" (click)="deleteProperty(property.id)">
                       <mat-icon>delete</mat-icon>
                       <span>Delete</span>
                     </button>
