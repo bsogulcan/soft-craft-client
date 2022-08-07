@@ -20,7 +20,8 @@
     <div class="col-12 md:col-4">
        <span class="field">
             <label for="inputName" class="block">Name</label>
-            <input type="text" id="inputName" pInputText [(ngModel)]="entity.name">
+            <input type="text" id="inputName" pInputText [(ngModel)]="entity.name"
+                   (ngModelChange)="onEntityNameChanged($event)">
         </span>
     </div>
 

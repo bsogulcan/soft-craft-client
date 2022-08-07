@@ -54,4 +54,8 @@ export class CreateEntityComponent implements OnInit {
       }
     }, () => this.saving = false);
   }
+
+  onEntityNameChanged(value: string) {
+    this.entity.displayName = value;
+  }
 }

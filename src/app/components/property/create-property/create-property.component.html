@@ -28,7 +28,7 @@
                     optionValue="id"
                     optionLabel="name"
                     placeholder="Select Entity"
-                    (ngModelChange)="onRelationalEntityChanged($event)"
+                    (onChange)="onRelationalEntityChanged($event.value)"
                     [showClear]="true"></p-dropdown>
 
         <p-dropdown [options]="this.enumerates" *ngIf="selectedPropertyState==2"
@@ -36,6 +36,7 @@
                     optionValue="id"
                     optionLabel="name"
                     placeholder="Select Enumerate"
+                    (onChange)="onEnumerateChanged($event.value)"
                     [showClear]="true"></p-dropdown>
       </div>
     </li>

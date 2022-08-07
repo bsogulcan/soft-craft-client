@@ -44,4 +44,12 @@ export class CreateProjectComponent implements OnInit {
       }
     }, () => this.saving = false);
   }
+
+  onProjectNameChanged(value: string) {
+    this.project.uniqueName = this.replaceAll(value, ' ', '');
+  }
+
+  public replaceAll(str: string, find: string, replace: string) {
+    return str.replace(new RegExp(find, 'g'), replace);
+  }
 }

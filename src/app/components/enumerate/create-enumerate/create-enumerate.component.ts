@@ -31,4 +31,7 @@ export class CreateEnumerateComponent implements OnInit {
     })
   }
 
+  onNameChanged(value: string) {
+    this.enumerate.displayName = value;
+  }
 }

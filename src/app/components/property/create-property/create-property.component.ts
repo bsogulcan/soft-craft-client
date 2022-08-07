@@ -162,4 +162,11 @@ export class CreatePropertyComponent implements OnInit {
     // @ts-ignore
     this.property.relationalDisplayName = this.entities.find(x => x.id == this.property.entityId)?.name;
   }
+
+  onEnumerateChanged(selectedEnumerateId: any) {
+    // @ts-ignore
+    this.property.name = this.enumerates.find(x => x.id == selectedEnumerateId)?.name;
+    // @ts-ignore
+    this.property.displayName = this.enumerates.find(x => x.id == selectedEnumerateId)?.name;
+  }
 }
