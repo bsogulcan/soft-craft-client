@@ -10,6 +10,7 @@ import {EnumerateFullOutput} from "../../services/enumerate/dtos/EnumerateFullOu
 import {CreatePropertyComponent} from "../property/create-property/create-property.component";
 import {CreateEnumerateComponent} from "./create-enumerate/create-enumerate.component";
 import {EditEnumerateComponent} from "./edit-enumerate/edit-enumerate.component";
+import {BreadcrumbService} from "../breadcrumb/breadcrumb.service";
 
 @Component({
   selector: 'app-enumerate',
@@ -27,11 +28,22 @@ export class EnumerateComponent implements OnInit {
               private router: Router,
               public dialogService: DialogService,
               private confirmationService: ConfirmationService,
-              private enumerateService: EnumerateService) {
+              private enumerateService: EnumerateService,
+              private breadCrumbService: BreadcrumbService) {
     route.params.subscribe(param => {
       if (param["projectId"]) {
         this.projectId = parseInt(param["projectId"]);
         this.getEnumerates();
+        this.breadCrumbService.addItem.emit([
+          {
+            label: 'Project',
+            routerLink: '/project/' + this.projectId + '/details'
+          },
+          {
+            label: 'Enumerates',
+            routerLink: '/project/' + this.projectId + '/enumerates'
+          }
+        ]);
       }
     })
   }

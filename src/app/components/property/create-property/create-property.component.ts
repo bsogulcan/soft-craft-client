@@ -143,4 +143,23 @@ export class CreatePropertyComponent implements OnInit {
         break;
     }
   }
+
+  onPropertyNameChanged(value: any) {
+    this.property.displayName = value;
+  }
+
+  onRelationalPropertyNameChanged(value: any) {
+    this.property.displayName = value;
+  }
+
+  onRelationalEntityChanged(selectedEntityId: any) {
+    // @ts-ignore
+    this.property.name = this.entities.find(x => x.id == selectedEntityId)?.name;
+    // @ts-ignore
+    this.property.displayName = this.entities.find(x => x.id == selectedEntityId)?.name;
+    // @ts-ignore
+    this.property.relationalName = this.entities.find(x => x.id == this.property.entityId)?.name;
+    // @ts-ignore
+    this.property.relationalDisplayName = this.entities.find(x => x.id == this.property.entityId)?.name;
+  }
 }

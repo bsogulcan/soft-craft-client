@@ -20,11 +20,11 @@ export class CreatePropertyInput {
   isEnumProperty: boolean;
   enumerateId: number | undefined;
   enumerate: EnumerateFullOutput;
-  displayOnList: boolean;
-  filterOnList: boolean;
+  displayOnList: boolean = true;
+  filterOnList: boolean = true;
 
   relationalToolTip: string;
   relationalName: string;
   relationalDisplayName: string;
-  intermediateTableName:string;
+  intermediateTableName: string;
 }

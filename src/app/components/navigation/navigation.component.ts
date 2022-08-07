@@ -10,6 +10,7 @@ import {DialogService} from "primeng/dynamicdialog";
 import {CreateNavigationComponent} from "./create-navigation/create-navigation.component";
 import {UpdateNavigationComponent} from "./update-navigation/update-navigation.component";
 import {ReOrderNavigationComponent} from "./re-order-navigation/re-order-navigation.component";
+import {BreadcrumbService} from "../breadcrumb/breadcrumb.service";
 
 @Component({
   selector: 'app-navigation',
@@ -25,11 +26,22 @@ export class NavigationComponent implements OnInit {
   constructor(private navigationService: NavigationService,
               private route: ActivatedRoute,
               public dialogService: DialogService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private breadCrumbService: BreadcrumbService) {
     route.params.subscribe(param => {
       if (param["projectId"]) {
         this.projectId = parseInt(param["projectId"]);
         this.getNavigations();
+        this.breadCrumbService.addItem.emit([
+          {
+            label: 'Project',
+            routerLink: '/project/' + this.projectId + '/details'
+          },
+          {
+            label: 'Navigation Items',
+            routerLink: '/project/' + this.projectId + '/navigations'
+          }
+        ]);
       }
     })
   }
