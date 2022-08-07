@@ -133,6 +133,8 @@ export class CreatePropertyComponent implements OnInit {
         this.property.isRelationalProperty = true;
         this.property.isEnumProperty = false;
         this.property.enumerateId = undefined;
+        this.property.displayOnList = false;
+        this.property.filterOnList = false;
         break;
       case 2:
         this.selectedPropertyType = undefined;
