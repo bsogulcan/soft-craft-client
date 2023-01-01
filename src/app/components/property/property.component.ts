@@ -13,6 +13,7 @@ import {TenantType} from "../../services/enums/TenantType";
 import {ConfirmationService} from "primeng/api";
 import {UpdateEntityInput} from "../../services/entity/dtos/UpdateEntityInput";
 import {EditPropertyComponent} from "./edit-property/edit-property.component";
+import {BreadcrumbService} from "../breadcrumb/breadcrumb.service";
 
 @Component({
   selector: 'app-property',
@@ -31,7 +32,8 @@ export class PropertyComponent implements OnInit {
               private entityService: EntityService,
               private propertyService: PropertyService,
               public dialogService: DialogService,
-              private confirmationService: ConfirmationService) {
+              private confirmationService: ConfirmationService,
+              private breadCrumbService: BreadcrumbService) {
     route.params.subscribe(param => {
       if (param["projectId"]) {
         this.projectId = param["projectId"];
@@ -42,6 +44,21 @@ export class PropertyComponent implements OnInit {
           if (response) {
             this.entity = response;
             this.getPropertyList();
+
+            this.breadCrumbService.addItem.emit([
+              {
+                label: 'Project',
+                routerLink: '/project/' + this.projectId + '/details'
+              },
+              {
+                label: 'Entities',
+                routerLink: '/project/' + this.projectId + '/entities'
+              },
+              {
+                label: 'Code Results',
+                routerLink: '/project/' + this.projectId + '/entity/' + entityId + '/code-results'
+              }
+            ]);
           }
         });
       }
@@ -112,5 +129,25 @@ export class PropertyComponent implements OnInit {
         this.getPropertyList();
       }
     });
+  }
+
+  getReleationTypeName(id: any) {
+    switch (id) {
+      case 0 :
+        return "One To One";
+        break;
+      case 1 :
+        return "One To Many";
+        break;
+      case 2 :
+        return "Many To Many";
+        break;
+      case 3 :
+        return "One To Zero";
+        break;
+      default:
+        return "-";
+        break;
+    }
   }
 }

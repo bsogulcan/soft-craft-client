@@ -5,6 +5,7 @@ import {EntityCodeResultDto} from "../../../services/entity/dtos/EntityCodeResul
 import {appModuleAnimation} from "../../../shared/animations/routerTransition";
 import {MatMenuTrigger} from "@angular/material/menu";
 import {take} from "rxjs";
+import {BreadcrumbService} from "../../breadcrumb/breadcrumb.service";
 
 @Component({
   selector: 'app-entity-code-result',
@@ -18,14 +19,31 @@ export class EntityCodeResultComponent implements OnInit {
   constructor(private entityService: EntityService,
               private router: Router,
               private route: ActivatedRoute,
-              private readonly viewRef: ViewContainerRef) {
+              private readonly viewRef: ViewContainerRef,
+              private breadCrumbService: BreadcrumbService) {
     route.params.subscribe(param => {
+      const projectId = param["projectId"];
       const entityId = param["entityId"];
       if (entityId) {
         entityService.getCodeResult(entityId).subscribe(response => {
           console.log(response);
           this.entityCodeResultDto = response;
         });
+
+        this.breadCrumbService.addItem.emit([
+          {
+            label: 'Project',
+            routerLink: '/project/' + projectId + '/details'
+          },
+          {
+            label: 'Entities',
+            routerLink: '/project/' + projectId + '/entities'
+          },
+          {
+            label: 'Properties',
+            routerLink: '/project/' + projectId + '/entity/' + entityId + '/properties'
+          }
+        ]);
       }
     });
   }

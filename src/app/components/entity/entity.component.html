@@ -50,18 +50,18 @@
                     <mat-icon>dehaze</mat-icon>
                   </button>
                   <mat-menu #entityActionsMenu>
-                    <menu mat-menu-item class="m-0" (click)="entityDetails(entity.id)">
+                    <button mat-menu-item [disabled]="entity.isDefaultAbpEntity" (click)="entityDetails(entity.id)">
                       <mat-icon>info</mat-icon>
                       <span>Details</span>
-                    </menu>
-                    <menu mat-menu-item class="m-0" (click)="entityProperties(entity.id)">
+                    </button>
+                    <button mat-menu-item (click)="entityProperties(entity.id)">
                       <mat-icon>settings</mat-icon>
                       <span>Properties</span>
-                    </menu>
-                    <menu mat-menu-item class="m-0" (click)="codeResults(entity.id)">
+                    </button>
+                    <button mat-menu-item [disabled]="entity.isDefaultAbpEntity" (click)="codeResults(entity.id)">
                       <mat-icon>code</mat-icon>
                       <span>Code Outputs</span>
-                    </menu>
+                    </button>
                   </mat-menu>
                 </td>
               </tr>

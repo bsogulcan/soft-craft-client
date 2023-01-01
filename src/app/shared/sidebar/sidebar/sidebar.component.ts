@@ -62,7 +62,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._toggleSideBarService.sideBarToggle.subscribe(visible => {
+    this._toggleSideBarService.refreshSideBar.subscribe(visible => {
       this.getProjects();
     })
   }

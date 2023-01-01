@@ -10,6 +10,7 @@ import {DialogService} from "primeng/dynamicdialog";
 import {CreateProjectComponent} from "../create-project/create-project.component";
 import {ProjectGenerateComponent} from "../project-generate/project-generate.component";
 import {Message, MessageService} from 'primeng/api';
+import {BreadcrumbService} from "../../breadcrumb/breadcrumb.service";
 
 @Component({
   selector: 'app-project-details',
@@ -33,7 +34,8 @@ export class ProjectDetailsComponent implements OnInit {
               private toggleSideBarService: ToggleSideBarService,
               private confirmationService: ConfirmationService,
               public dialogService: DialogService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private breadCrumbService: BreadcrumbService) {
     this.logTypes = [
       {name: 'Log4Net', id: 0},
       {name: 'ElasticSearch', id: 1},
@@ -64,7 +66,24 @@ export class ProjectDetailsComponent implements OnInit {
       const projectId = params['projectId'];
       projectService.get(projectId).subscribe(response => {
         this.project = response;
-        console.log(this.project)
+        this.breadCrumbService.addItem.emit([
+          {
+            label: 'Project',
+            routerLink: '/project/' + this.project.id + '/details'
+          },
+          {
+            label: 'Entities',
+            routerLink: '/project/' + this.project.id + '/entities'
+          },
+          {
+            label: 'Navigation Items',
+            routerLink: '/project/' + this.project.id + '/navigations'
+          },
+          {
+            label: 'Enumerates',
+            routerLink: '/project/' + this.project.id + '/enumerates'
+          }
+        ]);
       })
 
     });
@@ -77,7 +96,7 @@ export class ProjectDetailsComponent implements OnInit {
       icon: 'pi pi-info-circle',
       accept: () => {
         this.projectService.delete(this.project.id).subscribe(response => {
-          this.toggleSideBarService.sideBarToggle.emit(true);
+          this.toggleSideBarService.refreshSideBar.emit();
           this.router.navigateByUrl('/home');
         })
       },

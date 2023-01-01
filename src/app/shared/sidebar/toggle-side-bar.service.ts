@@ -5,6 +5,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 })
 export class ToggleSideBarService {
   sideBarToggle = new EventEmitter<boolean>();
+  refreshSideBar = new EventEmitter();
 
   constructor() {
 

@@ -3,6 +3,6 @@ export class CreateProjectDto {
   uniqueName: string;
   multiTenant: boolean;
   webAddress: string;
-  port: number;
+  port: number = 0;
   logType: number;
 }

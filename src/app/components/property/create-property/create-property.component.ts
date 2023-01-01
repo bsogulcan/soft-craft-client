@@ -133,6 +133,8 @@ export class CreatePropertyComponent implements OnInit {
         this.property.isRelationalProperty = true;
         this.property.isEnumProperty = false;
         this.property.enumerateId = undefined;
+        this.property.displayOnList = false;
+        this.property.filterOnList = false;
         break;
       case 2:
         this.selectedPropertyType = undefined;
@@ -142,5 +144,31 @@ export class CreatePropertyComponent implements OnInit {
         this.property.relationalEntityId = undefined;
         break;
     }
+  }
+
+  onPropertyNameChanged(value: any) {
+    this.property.displayName = value;
+  }
+
+  onRelationalPropertyNameChanged(value: any) {
+    this.property.displayName = value;
+  }
+
+  onRelationalEntityChanged(selectedEntityId: any) {
+    // @ts-ignore
+    this.property.name = this.entities.find(x => x.id == selectedEntityId)?.name;
+    // @ts-ignore
+    this.property.displayName = this.entities.find(x => x.id == selectedEntityId)?.name;
+    // @ts-ignore
+    this.property.relationalName = this.entities.find(x => x.id == this.property.entityId)?.name;
+    // @ts-ignore
+    this.property.relationalDisplayName = this.entities.find(x => x.id == this.property.entityId)?.name;
+  }
+
+  onEnumerateChanged(selectedEnumerateId: any) {
+    // @ts-ignore
+    this.property.name = this.enumerates.find(x => x.id == selectedEnumerateId)?.name;
+    // @ts-ignore
+    this.property.displayName = this.enumerates.find(x => x.id == selectedEnumerateId)?.name;
   }
 }

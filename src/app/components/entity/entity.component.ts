@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {GetEntityListInput} from "../../services/entity/dtos/GetEntityListInput";
 import {TenantType} from "../../services/enums/TenantType";
 import {PrimaryKeyType} from "../../services/enums/PrimaryKeyType";
+import {BreadcrumbService} from "../breadcrumb/breadcrumb.service";
 
 @Component({
   selector: 'app-entity',
@@ -21,7 +22,8 @@ export class EntityComponent implements OnInit {
 
   constructor(private entityService: EntityService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private breadCrumbService: BreadcrumbService) {
     route.params.subscribe(param => {
       if (param['projectId']) {
         this.projectId = param['projectId'];
@@ -35,7 +37,20 @@ export class EntityComponent implements OnInit {
             this.entities = entities;
           }
         });
+
+        this.breadCrumbService.addItem.emit([
+          {
+            label: 'Project',
+            routerLink: '/project/' + this.projectId + '/details'
+          },
+          {
+            label: 'Entities',
+            routerLink: '/project/' + this.projectId + '/entities'
+          }
+        ]);
       }
+
+
     })
   }
 

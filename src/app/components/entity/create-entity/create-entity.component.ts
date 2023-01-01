@@ -50,8 +50,12 @@ export class CreateEntityComponent implements OnInit {
     this.entityService.create(this.entity).subscribe(response => {
       if (response) {
         this.saving = false;
-        this.router.navigate(['project', this.entity.projectId, 'entities']);
+        this.router.navigate(['project', this.entity.projectId, 'entity', response.id, 'properties']);
       }
     }, () => this.saving = false);
+  }
+
+  onEntityNameChanged(value: string) {
+    this.entity.displayName = value;
   }
 }

@@ -4,6 +4,7 @@ import {CreateProjectDto} from "../../../services/projects/dtos/CreateProjectDto
 import {ProjectService} from "../../../services/projects/project.service";
 import {ToggleSideBarService} from "../../../shared/sidebar/toggle-side-bar.service";
 import {Router} from "@angular/router";
+import {BreadcrumbService} from "../../breadcrumb/breadcrumb.service";
 
 @Component({
   selector: 'app-create-project',
@@ -19,7 +20,8 @@ export class CreateProjectComponent implements OnInit {
 
   constructor(private projectService: ProjectService,
               private router: Router,
-              private toggleSideBarService: ToggleSideBarService) {
+              private toggleSideBarService: ToggleSideBarService,
+              private breadCrumbService: BreadcrumbService) {
     this.logTypes = [
       {name: 'Log4Net', id: 0},
       {name: 'ElasticSearch', id: 1},
@@ -28,6 +30,7 @@ export class CreateProjectComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.breadCrumbService.addItem.emit();
   }
 
   save() {
@@ -36,9 +39,17 @@ export class CreateProjectComponent implements OnInit {
     this.projectService.create(this.project).subscribe(response => {
       if (response) {
         this.saving = false;
-        this.toggleSideBarService.sideBarToggle.emit(true);
+        this.toggleSideBarService.refreshSideBar.emit();
         this.router.navigate(['project', response.id, 'entities']);
       }
     }, () => this.saving = false);
+  }
+
+  onProjectNameChanged(value: string) {
+    this.project.uniqueName = this.replaceAll(value, ' ', '');
+  }
+
+  public replaceAll(str: string, find: string, replace: string) {
+    return str.replace(new RegExp(find, 'g'), replace);
   }
 }
